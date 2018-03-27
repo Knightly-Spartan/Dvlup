@@ -1,0 +1,17 @@
+{
+    "projectName": "Dvlup",
+    "username": "amitsanwariya@outlook.com",
+    "id": "87121d00-31ab-11e8-9dd1-c5826e5ebe71",
+    "namespace": "",
+    "orgType": "developer",
+    "loginUrl": "https://login.salesforce.com/",
+    "instanceUrl": "https://spartan-dev-ed.my.salesforce.com",
+    "workspace": "D:\\Workspace",
+    "subscription": [
+        "ApexClass",
+        "ApexComponent",
+        "ApexPage",
+        "ApexTrigger",
+        "StaticResource"
+    ]
+}
