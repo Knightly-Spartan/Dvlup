@@ -1,2 +1,2 @@
 # Dvlup
-Readme Test 2
+A copy of my developer edition. Spartan-dev-ed.
