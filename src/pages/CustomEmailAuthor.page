@@ -1,0 +1,224 @@
+<apex:page controller="CustomEmailAuthorController" title="Task: Send Email" id="pg" > 
+    <apex:sectionHeader title="Task" subtitle="Send An Email" />
+    <apex:includescript value="/apexpages/fckeditor/fckeditor.js" />
+    
+    <!-- Bootstrap CSS -->
+    <apex:stylesheet value="{!URLFOR($Resource.Bootstrap, '/css/bootstrap.min.css')}"/>
+    <!-- Main CSS >
+    <apex:stylesheet value="{!URLFOR($Resource.QuickQuoteCreate, '/css/style.css')}"/-->
+    <style>
+        .locationError { color: Red; font-weight: strong;}
+    </style>
+    
+    <script>
+    function openEmailTemplateList(){
+        openLookupPopupTemplate();
+        //window.open('../apex/EmailTemplateList?id={!existingProject.Id}', "EmailTemplate", 'location=0,status=0,scrollbars=1,width=500,height=500');
+        return false;
+    }
+    function openAttach(){
+        openLookupPopupAttach();
+        //AttachWindow = window.open('../apex/AttachFiles?projId={!existingProject.Id}', "Attach", "location=0,status=0,scrollbars=1,width=500,height=700");
+        return false;
+    }
+    function GenerateAttchmentList(id)
+    {
+        //alert('document Id: '+ id);
+        ShowAttachment(id);
+    }   
+    function UseEmailTemplate(id) {
+        MergeTemplate(id);
+    }  
+    function deleteAttachmentConfirmation(index) {
+        if(confirm("Are you sure?")) {
+            DeleteAttachment(index);
+        }
+        return false;
+    }
+    function FCKeditor_OnComplete(editorInstance ){
+        // this function gets called on the render of each editor on the page
+        editorInstance.Events.AttachEvent( 'OnSelectionChange', ontextChange ) ;
+    }
+    function ontextChange(editorInstance){
+        var htmlText = editorInstance.GetHTML(true);
+        var realtedtextArea = document.getElementById(editorInstance.Name).value;
+        var divElement = document.getElementById('plainTextBody');
+        divElement.innerHTML = htmlText;
+        document.getElementById('pg:frm:hdnHtmlBody').value = divElement.textContent||divElement.innerText;
+    }
+    </script>
+    
+    <apex:form id="frm" >      
+        <apex:actionFunction action="{!showAttachmentList}" name="ShowAttachment" rerender="Attachment" status="myStatus">
+            <apex:param name="attachmentIds" assignTo="{!attachIds}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction action="{!deleteSelectedAttachment}" name="DeleteAttachment" rerender="Attachment" status="myStatus">
+            <apex:param name="selectedIndex" assignTo="{!selectedIndex}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction action="{!mergeEmailTemplate}" name="MergeTemplate" rerender="mailContent" status="myStatus">
+            <apex:param name="tempId" assignTo="{!templateId}" value="" />
+        </apex:actionFunction>
+        
+        <apex:inputHidden value="{!textBody}" id="hdnHtmlBody"/>
+        
+        <apex:pageblock mode="edit" id="mailContent">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Send" action="{!emailSend}" />
+                <apex:commandButton value="Select Template" onclick="openEmailTemplateList();return false;" />
+                <apex:commandButton value="Attach File" onclick="Javascript:return openAttach();"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+            
+            <c:EmailTemplateList ></c:EmailTemplateList>
+            <c:AttachFilesComponent projId="{!existingProject.Id}"/>
+            <div class="ui">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <apex:messages styleClass="locationError"/> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <apex:outputLabel style="text-align:right;"> From: </apex:outputLabel>
+                        </div>
+                        <div class="col-sm-10">
+                            <apex:selectList id="fromContact" style="width:90%;height:32px;" value="{!fromContact}" size="1" multiselect="false">
+                                <apex:selectOptions value="{!ProjectContacts}" />
+                            </apex:selectList>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <apex:inputHidden value="{!contactId}" id="contactLookupId"/> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <apex:outputLabel > To: </apex:outputLabel>
+                        </div>
+                        <div class="col-sm-10">
+                            <c:CustomLookup objectName="Contact" fieldAPI="Name" fieldToPopulateId="{!$Component.contactLookupId}" fieldSetName="FieldsForModalLookup"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <apex:outputLabel > Account: </apex:outputLabel>
+                        </div>
+                        <div class="col-sm-10">
+                            <apex:outputLabel value="{!existingProject.Name}"> </apex:outputLabel>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <apex:outputLabel > Additional To:   </apex:outputLabel>
+                        </div>
+                        <div class="col-sm-10">
+                            <apex:outputPanel layout="inline" styleClass="requiredInput" id="pbpanels2">
+                                <apex:inputTextarea style="width:90%;height:32px;" value="{!addEmails}" id="additionalTo"/>
+                                <c:LookupAdditionContactsComponent accName="Contact" projId="Name" fieldToPopulateId1="{!$Component.additionalTo}" fieldToPopulateId2="{!$Component.ccEmailsTo}" fieldToPopulateId3="{!$Component.bccEmailsTo}"/>
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <apex:outputLabel > CC:  </apex:outputLabel>
+                        </div>
+                        <div class="col-sm-10">
+                            <apex:outputPanel layout="inline" styleClass="requiredInput" id="pbpanels3">
+                                <apex:inputTextarea style="width:90%;height:32px;" value="{!ccEmails}" id="ccEmailsTo"/>
+                                <c:LookupAdditionContactsComponent accName="Contact" projId="Name" fieldToPopulateId1="{!$Component.additionalTo}" fieldToPopulateId2="{!$Component.ccEmailsTo}" fieldToPopulateId3="{!$Component.bccEmailsTo}"/>
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <apex:outputLabel > BCC:  </apex:outputLabel>
+                        </div>
+                        <div class="col-sm-10">
+                            <apex:outputPanel layout="inline" styleClass="requiredInput" id="pbpanels4">
+                                <apex:inputTextarea style="width:90%;height:32px;" value="{!bccEmails}" id="bccEmailsTo"/>
+                                <c:LookupAdditionContactsComponent accName="Contact" projId="Name" fieldToPopulateId1="{!$Component.additionalTo}" fieldToPopulateId2="{!$Component.ccEmailsTo}" fieldToPopulateId3="{!$Component.bccEmailsTo}"/>
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <apex:outputLabel > Subject: </apex:outputLabel>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="requiredInput">
+                                <div class="requiredBlock"></div>
+                                <apex:inputText style="width:90%;height:32px;" value="{!subject}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="plainTextBody" style="display:none"></div>
+                            <apex:inputtextArea id="txtArea" value="{!mailBody}" />
+                            <script>
+                            var editor = new FCKeditor('{!$Component.txtArea}', null, 0);
+                            editor.BasePath = '/apexpages/fckeditor/';
+                            editor.Config['CustomConfigurationsPath'] = '/apexpages/richtext.config.js';
+                            editor.ToolbarSet = 'SalesforceBasic';
+                            editor.Config['SkinPath'] = editor.BasePath + 'editor/skins/sfdc/';
+                            editor.Config['MaxLength'] = 10;
+                            editor.Config['DefaultLanguage'] = 'en-us';
+                            
+                            editor.Height = 600; // 600 pixels
+                            
+                            editor.ReplaceTextarea();
+                            
+                            var divElement = document.getElementById('plainTextBody');
+                            divElement.innerHTML = document.getElementById('{!$Component.txtArea}').value;
+                            document.getElementById('pg:frm:hdnHtmlBody').value = divElement.textContent||divElement.innerText;
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </apex:pageblock>
+        
+        <apex:pageblock id="Attachment" title="Attachment">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Attach File" onclick="Javascript:return openAttach();"/>
+            </apex:pageBlockButtons>
+            <apex:outputPanel rendered="{!attachDoc.size == 0}">
+                <div class="pbBody"><table class="list" border="0" cellspacing="0" cellpadding="0">
+                    <tbody><tr class="headerRow"><th scope="col" class="noRowsHeader">no attachments</th></tr>
+                    </tbody></table>
+                </div>
+            </apex:outputPanel>
+            <apex:variable var="index" value="{!0}" />
+            <apex:pageblocktable value="{!attachDoc}" var="at" rendered="{!attachDoc.size > 0}">
+                <apex:column headerValue="Action" >
+                    <apex:outputLink onclick="deleteAttachmentConfirmation({!index});" value="#">
+                        <apex:outputText value="Del"/>
+                    </apex:outputLink>
+                </apex:column>
+                <apex:column headerValue="Name" >
+                    {!at.Name}
+                    <apex:variable var="index" value="{!index + 1}" />
+                </apex:column>
+                <apex:column headerValue="Size" >
+                    {!round(at.bodyLength/1024,2)}KB
+                </apex:column>
+            </apex:pageblocktable>
+        </apex:pageblock>
+        <apex:outputpanel >
+            <apex:actionstatus id="myStatus">
+                <apex:facet name="start">
+                    <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                                                                         height: 100%;opacity:0.65;width:100%;z-index:9000;">
+                        <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                            <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                            <span class="waitingDescription">Please Wait...</span>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionstatus>
+        </apex:outputpanel>
+    </apex:form>   
+</apex:page>

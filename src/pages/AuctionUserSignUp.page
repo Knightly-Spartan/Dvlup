@@ -1,0 +1,134 @@
+<apex:page sidebar="false" showHeader="false">
+    <html>
+    <head>
+        <title>Sign Up</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+
+        <style>
+            input[type="text"],
+            input[type="password"],
+            input[type="date"],
+            input[type="datetime"],
+            input[type="email"],
+            input[type="number"],
+            input[type="search"],
+            input[type="tel"],
+            input[type="time"],
+            input[type="url"],
+			textarea,
+select {
+      background: rgba(253, 254, 254,0.1);
+      border: none;
+      font-size: 16px;
+      height: auto;
+      margin: 0;
+      outline: 0;
+      padding: 15px;
+      width: 100%;
+      background-color: white;
+      color: #8a97a0;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+      margin-bottom: 30px;
+
+}
+.button {
+            padding: 19px 39px 18px 39px;
+            color: #FFF;
+            background-color: #FFA07A;
+            font-size: 18px;
+            text-align: center;
+            font-style: normal;
+            border-radius: 5px;
+            width: 100%;
+            border: 1px solid #FDFEFE;
+            border-width: 1px 1px 3px;
+            box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+            margin-bottom: 10px;
+
+
+            
+}
+
+fieldset {
+      margin-bottom: 30px;
+      border: none;
+    }
+    
+    legend {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    label.light {
+      font-weight: 300;
+      display: inline;
+    }
+    
+    .number {
+      background-color: #F2F4F4;<!--#5fcf80;-->
+      color: #fff;
+      height: 30px;
+      width: 30px;
+      display: inline-block;
+      font-size: 0.8em;
+      margin-right: 4px;
+      line-height: 30px;
+      text-align: center;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+      border-radius: 100%;
+    }
+        </style>
+            <script>  
+function validateform(){  
+var name=document.myform.name.value;  
+    //var password=document.myform.password.value;  
+  
+if (name==null || name==""){  
+  alert("Name can't be blank");  
+  return false;  
+}else if(password.length<8){  
+  alert("Password must be at least 8 characters long.");  
+  return false;  
+  }  
+    var x=document.myform.email.value;  
+var atposition=x.indexOf("@");  
+var dotposition=x.lastIndexOf(".");  
+if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){  
+  alert("Please enter a valid e-mail address \n atpostion:"+atposition+"\n dotposition:"+dotposition);  
+  return false;  
+  }  
+}  
+</script>  
+    </head>
+    <body>
+      <form action="#" style="max-width: 400px;margin: 10px auto;padding: 10px 50px;background: #f4f7f8;border-radius: 8px;" name="myform" onsubmit="validateform()">
+        
+        
+        <fieldset>
+            
+          <legend><span class="number"></span><h1 style="font-size: 40px;">Sign Up </h1></legend>
+          <label for="name"><font size="3">Name:</font></label>
+            <input type="text" id="name" name="user_name" placeholder="Your name...."/>
+
+          
+          <label for="mail"><font size="3">Email:</font></label>
+            <input type="email" id="mail" name="user_email" placeholder="Your email...."/>
+          
+          <!--<label for="password"><font size="3">Password:</font></label>
+            <input type="password" id="password" name="user_password" placeholder="Your password...."/-->
+
+          
+        
+        </fieldset>
+        <button type="submit" class=" button">Sign Up</button>
+      </form>
+      
+    </body>
+    </html>
+    
+</apex:page>

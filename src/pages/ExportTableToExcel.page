@@ -1,0 +1,61 @@
+<!--*
+*Appirio Inc. 2016
+*Name  : iLevelReportPage
+*Author: Amit SanWariya (Appirio)
+*Date  : 29 Nov, 2016
+*Ref   : T-553528
+*Description: To create a Report of Account, Deals, Deal Teams and Deal Contact Roles
+*-->
+<apex:page controller="ExportTableToExcelController" doctype="html-5.0">
+  <apex:form id="frm">
+    <apex:pagemessages />
+    <apex:actionfunction name="renderTable" action="{!fetchData}" rerender="frm,tablePanel" status="actionStatus" />
+    <apex:actionfunction name="exportExcel" action="{!exportExcelSheet}" status="actionStatus" />
+    <apex:pageblock >
+      <apex:outputtext style="font-weight:600" value="Date Range: " />
+      <apex:input type="date" value="{!startDate}" onchange="renderTable()" />
+      <apex:outputtext style="font-weight:600" value=" To: " />
+      <apex:input type="date" value="{!endDate}" onchange="renderTable()" />
+      <apex:commandButton value="Export" onclick="exportExcel();return false;" />
+    </apex:pageblock>
+    <apex:pageblock >
+      <apex:outputtext value="Select the Actual Close Date Range" rendered="{!!showData}" />
+      <apex:outputpanel id="tablePanel" rendered="{!showData}">
+        <table border="1" style="border-collapse:collapse">
+          <thead>
+            <apex:repeat value="{!accFieldSet}" var="f">
+              <th><apex:outputLabel value="{!f.Label}" /></th>
+            </apex:repeat>
+            <apex:repeat value="{!oppFieldSet}" var="f">
+              <th><apex:outputLabel value="{!IF(f.Label == 'Name', 'Opportunity Name', f.Label)}" /></th>
+            </apex:repeat>
+          </thead>
+          <tbody>
+            <apex:repeat value="{!dataWrapperList}" var="dataWrap">
+              <tr>
+                <apex:repeat value="{!accFieldSet}" var="f">
+                  <td><apex:outputField value="{!dataWrap.acc[f.fieldPath]}" /></td>
+                </apex:repeat>
+                <apex:repeat value="{!oppFieldSet}" var="f">
+                  <td><apex:outputField value="{!dataWrap.opp[f.fieldPath]}" /></td>
+                </apex:repeat>
+              </tr>    
+            </apex:repeat>   
+          </tbody>
+        </table>
+      </apex:outputpanel>
+    </apex:pageblock>
+    <apex:outputpanel >
+      <apex:actionstatus id="actionStatus">
+        <apex:facet name="start">
+          <div class="waitingSearchDiv" id="el_loading" style="background-color:#fbfbfb;height:100%;opacity:.65;width:100%;z-index:9000">
+            <div class="waitingHolder" style="top:74.2px;width:91px">
+              <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+              <span class="waitingDescription">Please Wait...</span>
+            </div>
+          </div>
+        </apex:facet>
+      </apex:actionstatus>
+    </apex:outputpanel>
+  </apex:form>
+</apex:page>

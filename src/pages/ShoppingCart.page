@@ -1,0 +1,33 @@
+<apex:page controller="ShoppingController">
+    <apex:form >
+    <apex:pageMessages id="err"/>
+        <apex:actionFunction name="calcTotal" action="{!calcTotal}" />
+        <apex:pageBlock title="Your Cart" id="shopping_cart">
+            <apex:pageBlockSection >
+                <apex:pageBlockTable value="{!cart}" var="citem">
+                    <apex:column headerValue="Product">
+                        <apex:outputText value="{!citem.Name}"/>
+                    </apex:column>
+                    <apex:column headerValue="Price">
+                        <apex:outputText value="{0,number,currency}">
+                            <apex:param value="{!citem.Price}"/>
+                        </apex:outputText>
+                    </apex:column>
+                    <apex:column headerValue="Quantity">
+                        <apex:inputText onchange="calcTotal()" value="{!citem.quantity}" />
+                    </apex:column>
+                    <apex:column headerValue="Sub-Total">
+                        <apex:outputText value="{0,number,currency}">
+                            <apex:param value="{!citem.subTotal}"/>
+                        </apex:outputText>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Total Cost">
+                <apex:outputPanel >
+                    <apex:outputText value="{!Total}"/>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

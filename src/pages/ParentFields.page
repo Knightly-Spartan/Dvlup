@@ -1,0 +1,16 @@
+<apex:page standardController="Contact" extensions="ParentFieldsExtension" standardStylesheets="false">
+    <apex:stylesheet value="/dCSS/Theme3/en/common.css"/>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageMessages />
+            <apex:pageBlockSection >
+                <apex:repeat value="{!accFieldSet}" var="f">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!IF(LEFT(f.Label,7) == 'Account','','Account')} {!f.Label}"/>
+                        <apex:outputField value="{!acc[f.fieldPath]}"/>
+                    </apex:pageBlockSectionItem>
+                </apex:repeat>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
