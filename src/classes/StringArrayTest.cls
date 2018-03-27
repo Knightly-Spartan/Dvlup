@@ -4,7 +4,7 @@ public class StringArrayTest {
         List<String> myArray = new List<String>();
         for(Integer i=0;i<n;i++)
         {
-           myArray.add('TestValue '+i);
+           myArray.add('Test '+i);
            System.debug(myArray[i]);
         }
         return myArray;

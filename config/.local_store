@@ -1554,15 +1554,17 @@
         "mmState": "clean"
     },
     "StringArrayTest.cls": {
-        "createdById": "00528000000iIrlAAE",
-        "createdByName": "Amit Sanwariya",
-        "createdDate": "2016-01-21T07:34:26.000Z",
-        "fileName": "unpackaged/classes/StringArrayTest.cls",
-        "fullName": "StringArrayTest",
         "id": "01p28000005WwLKAA0",
+        "name": "StringArrayTest",
+        "createdDate": "2016-01-21T07:34:26.000+0000",
+        "createdById": "00528000000iIrlAAE",
+        "namespacePrefix": null,
         "lastModifiedById": "00528000000iIrlAAE",
+        "lastModifiedDate": "2018-03-27T11:24:49.000+0000",
+        "fullName": "StringArrayTest",
+        "fileName": "unpackaged/classes/StringArrayTest.cls",
+        "createdByName": "Amit Sanwariya",
         "lastModifiedByName": "Amit Sanwariya",
-        "lastModifiedDate": "2016-01-21T07:34:26.000Z",
         "manageableState": "unmanaged",
         "type": "ApexClass",
         "mmState": "clean"
