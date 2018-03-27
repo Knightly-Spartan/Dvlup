@@ -4,7 +4,7 @@ public class AccountHandler {
         try{
             Account a = new Account(Name=accName);
             insert a;
-            System.debug('Good Job Gaurav! Account created');
+            System.debug('Account created');
             return a;
         } catch(Exception e){
             System.Debug('Account not created');

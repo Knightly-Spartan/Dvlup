@@ -2044,15 +2044,17 @@
         "mmState": "clean"
     },
     "AccountHandler.cls": {
-        "createdById": "00528000000iIrlAAE",
-        "createdByName": "Amit Sanwariya",
-        "createdDate": "2016-01-21T07:32:25.000Z",
-        "fileName": "unpackaged/classes/AccountHandler.cls",
-        "fullName": "AccountHandler",
         "id": "01p28000005WwKvAAK",
+        "name": "AccountHandler",
+        "createdDate": "2016-01-21T07:32:25.000+0000",
+        "createdById": "00528000000iIrlAAE",
+        "namespacePrefix": null,
         "lastModifiedById": "00528000000iIrlAAE",
+        "lastModifiedDate": "2018-03-27T11:17:22.000+0000",
+        "fullName": "AccountHandler",
+        "fileName": "unpackaged/classes/AccountHandler.cls",
+        "createdByName": "Amit Sanwariya",
         "lastModifiedByName": "Amit Sanwariya",
-        "lastModifiedDate": "2016-01-21T07:32:25.000Z",
         "manageableState": "unmanaged",
         "type": "ApexClass",
         "mmState": "clean"
