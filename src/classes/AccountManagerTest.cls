@@ -10,7 +10,7 @@ public class AccountManagerTest {
         request.httpMethod = 'GET';
         RestContext.request = request;
         
-		system.debug('test account result = '+ AccountManager.getAccount());
+		system.debug('Test Accounts '+ AccountManager.getAccount());
 
 
         
