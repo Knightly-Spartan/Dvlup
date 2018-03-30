@@ -2580,15 +2580,17 @@
         "mmState": "clean"
     },
     "AccountManagerTest.cls": {
-        "createdById": "00528000000iIrlAAE",
-        "createdByName": "Amit Sanwariya",
-        "createdDate": "2018-03-06T06:06:56.000Z",
-        "fileName": "unpackaged/classes/AccountManagerTest.cls",
-        "fullName": "AccountManagerTest",
         "id": "01p0K00000FXKbJQAX",
+        "name": "AccountManagerTest",
+        "createdDate": "2018-03-06T06:06:56.000+0000",
+        "createdById": "00528000000iIrlAAE",
+        "namespacePrefix": null,
         "lastModifiedById": "00528000000iIrlAAE",
+        "lastModifiedDate": "2018-03-30T06:38:40.000+0000",
+        "fullName": "AccountManagerTest",
+        "fileName": "unpackaged/classes/AccountManagerTest.cls",
+        "createdByName": "Amit Sanwariya",
         "lastModifiedByName": "Amit Sanwariya",
-        "lastModifiedDate": "2018-03-06T06:11:20.000Z",
         "manageableState": "unmanaged",
         "type": "ApexClass",
         "mmState": "clean"
