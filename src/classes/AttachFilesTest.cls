@@ -3,7 +3,6 @@
 //
 // AttachFilesTest
 //
-// 04 March 2013        Sudhir Kr. Jagetiya          Original - Asset
 // 07 December 2016     Amit Sanwariya    			 Modified - For Send Email T-548021
 // 
 //
