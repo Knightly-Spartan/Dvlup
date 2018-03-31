@@ -1836,15 +1836,17 @@
         "mmState": "clean"
     },
     "AttachFilesTest.cls": {
-        "createdById": "00528000000iIrlAAE",
-        "createdByName": "Amit Sanwariya",
-        "createdDate": "2018-01-22T08:59:37.000Z",
-        "fileName": "unpackaged/classes/AttachFilesTest.cls",
-        "fullName": "AttachFilesTest",
         "id": "01p0K00000FX9YbQAL",
+        "name": "AttachFilesTest",
+        "createdDate": "2018-01-22T08:59:37.000+0000",
+        "createdById": "00528000000iIrlAAE",
+        "namespacePrefix": null,
         "lastModifiedById": "00528000000iIrlAAE",
+        "lastModifiedDate": "2018-03-31T08:58:04.000+0000",
+        "fullName": "AttachFilesTest",
+        "fileName": "unpackaged/classes/AttachFilesTest.cls",
+        "createdByName": "Amit Sanwariya",
         "lastModifiedByName": "Amit Sanwariya",
-        "lastModifiedDate": "2018-01-22T08:59:37.000Z",
         "manageableState": "unmanaged",
         "type": "ApexClass",
         "mmState": "clean"
