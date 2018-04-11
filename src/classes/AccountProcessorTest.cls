@@ -1,7 +1,7 @@
 @isTest
 public class AccountProcessorTest {
     public static testMethod void tesFutureMethod() {
-        Account acc = new Account(Name = 'Test Acc');
+        Account acc = new Account(Name = 'Test AccOUNT');
         insert acc;
         Contact con = new Contact(AccountId = acc.Id, LastName = 'Test');
         insert con;
