@@ -1,0 +1,7 @@
+<apex:page controller="RadiusMapController" contentType="text/xml" action="{!filterXML}">
+    <markers>
+        <apex:repeat value="{!contactsXML}" var="con">
+            <marker resource_name="{!con.name}" lat="{!con.Location__latitude__s}" lon="{!con.Location__longitude__s}" />        
+        </apex:repeat>
+    </markers>
+</apex:page>

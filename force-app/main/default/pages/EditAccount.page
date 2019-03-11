@@ -1,0 +1,15 @@
+<apex:page controller="EditAccountController">
+<apex:form >
+<apex:pageBlock title="Edit/Create Account"/> 
+<apex:pageMessages />
+<table border ="0"><tr>
+<th>Account Name : </th>
+<td><apex:inputField value="{!acc.Name}"/></td></tr>
+<tr><th>Account Phone : </th>
+<td><apex:inputField value="{!acc.Phone}"/></td>
+</tr><tr><td>
+<apex:commandButton value="Save" action="{!save}"/></td>
+<td><apex:commandButton value="Cancel" action="{!cancel}" immediate="true"/></td>
+</tr></table>
+</apex:form>
+</apex:page>

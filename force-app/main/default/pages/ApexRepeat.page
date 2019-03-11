@@ -1,0 +1,13 @@
+<apex:page controller="ApexRepeatController">
+    <apex:form >
+        <apex:pageBlock title="Account Records"/> 
+        <table border="0">
+            <tr><th>Account Name</th>
+                <th>Account Phone</th></tr> 
+            <apex:repeat value="{!accIdList}" var="acc"> 
+                <tr><td>{!acc.Name}</td> 
+                    <td>{!acc.Phone}</td> </tr> 
+            </apex:repeat>
+        </table>
+    </apex:form>
+</apex:page>

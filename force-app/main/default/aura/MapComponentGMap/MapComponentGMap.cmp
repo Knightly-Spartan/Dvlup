@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable">
+    
+    <aura:attribute name="latitude" type="Decimal" default="37.784173" />
+    <aura:attribute name="longitude" type="Decimal" default="-122.401557" />
+    <aura:attribute name="popupInfo" type="String" default="Home Of Dreamforce" />
+    
+    <aura:attribute name="map" type="Object"/>
+	<aura:attribute name="geocoder" type="Object"/>
+    
+    <ltng:require styles="/resource/leaflet/leaflet.css,/resource/leaflet/leaflet-search.css" 
+                  scripts="/resource/leaflet/leaflet.js,/resource/leaflet/leaflet-search.js,/resource/gmap_api"
+             afterScriptsLoaded="{!c.jsLoaded}" />
+    <div class="map" aura:id="map"></div>
+
+</aura:component>

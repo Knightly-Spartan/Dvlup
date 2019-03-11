@@ -1,0 +1,316 @@
+<apex:component controller="LookupAdditionContactsController">
+    <style>
+        #popupcontentAdditional{
+        position: fixed;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        display: none;
+        overflow: auto;
+        border:3px solid #585858;
+        background-color:white;
+        //border:1px solid #333;
+        z-index:100;
+        padding:5px;
+        line-height:20px;
+        }
+        #opaqueAdditional {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: none;
+        background-color: gray;
+        filter: alpha(opacity=80);
+        opacity: 0.8;
+        -moz-opacity:0.8;
+        -khtml-opacity:0.8
+        }
+        * html #opaqueAdditional {
+        position: absolute;
+        }
+        .lookupHeader{
+        padding:10px;
+        }
+        .searchResult{
+        padding: 10px;
+        font-family: 'Arial','Helvetica',sans-serif;
+        font-weight: bold;
+        font-size: 118%;
+        }
+    </style>
+    <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+    <script>
+    var newWin = null;
+    var typeNameId = '';
+    var selectedId = '';
+    var searchText = '';
+    function openAdditionalContactPopup() {
+        document.getElementById('opaqueAdditional').style.display='block';
+        var popUp = document.getElementById("popupcontentAdditional");
+        
+        popUp.style.display = "block";
+    }
+    function hideAdditionalContactPopup()
+    {
+        var popUp = document.getElementById("popupcontentAdditional");
+        popUp.style.display = "none";
+        document.getElementById('opaqueAdditional').style.display='none';
+    }
+    
+    function listbox_moveacross(sourceID,toFrom) {
+        var src; 
+        var dest;
+        var move = 'false' ;
+        
+        // check for the destination and source to move data
+        if(toFrom == 'to') {
+            src = document.getElementById('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContact');
+            dest = document.getElementById(sourceID);
+        }else if(toFrom == 'from') {
+            src = document.getElementById(sourceID);
+            dest = document.getElementById('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContact');
+        }
+        
+        // check if any item is selected to move
+        for(var count=0; count < src.options.length; count++) {
+            if(src.options[count].selected == true)
+                move = 'true' ;
+        }
+        
+        // if no item is selected or source contains '--None' or souce contains no data then do nothing
+        if(move == 'false' || src.options[0].text == '--None--'|| src.options.length<=0 );
+        else {
+            for(var count=0; count < src.options.length; count++) {
+                // move data from source to destination
+                if(src.options[count].selected == true) {
+                    var option = src.options[count];
+                    var newOption = document.createElement("option");
+                    newOption.value = option.value;
+                    newOption.text = option.text;
+                    newOption.selected = true;
+                    try {
+                        dest.add(newOption, null); //Standard
+                        src.remove(count, null);
+                    }catch(error) {
+                        dest.add(newOption); // IE only
+                        src.remove(count);
+                    }
+                    count--;
+                }
+            }
+            // if destination contains '--None--' remove it.
+            if(dest.options[0].text == '--None--'){
+                dest.remove(0);
+            }
+            
+            
+        }
+        // if all data is moved from source to destination show '--None--' in source.
+        if(src.options.length <= 0){
+            var newOption = document.createElement("option");
+            newOption.value = '--None--';
+            newOption.text = '--None--';
+            src.add(newOption, null);
+        }
+    }
+    
+    function getEmails(ListBoxEmail){
+        var emails;
+        for(var count=0; count < ListBoxEmail.options.length; count++) {
+            var option = ListBoxEmail.options[count];
+            if(count == 0){
+                emails = option.value;
+            }else {
+                emails += '\;'+ option.value;
+            }
+        }
+        return emails;
+    }
+    
+    function closeWindow(){
+        hideAdditionalContactPopup();
+    }      
+    </script>
+    
+    <apex:outputPanel id="scriptPanel">
+        <script>
+        function restoreContactEmails(){
+            var  addContactEmails = document.getElementById('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContactAdd');
+            var  ccContactEmails = document.getElementById('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContactcc');
+            var  bccCOntactEmails = document.getElementById('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContactbcc');
+            var addEmails = getEmails(addContactEmails);
+            var ccEmails= getEmails(ccContactEmails);
+            var bccEmails = getEmails(bccCOntactEmails);
+            
+            if(addEmails != '--None--' && addEmails != '') {
+                if(document.getElementById("{!fieldToPopulateId1}").value == '') {
+                    document.getElementById("{!fieldToPopulateId1}").value = addEmails;
+                }
+                else 
+                    document.getElementById("{!fieldToPopulateId1}").value += '\;'+addEmails;
+            }
+            
+            if(ccEmails != '--None--' && ccEmails != '') {
+                if(document.getElementById("{!fieldToPopulateId2}").value == '')      
+                    document.getElementById("{!fieldToPopulateId2}").value = ccEmails;
+                else 
+                    document.getElementById("{!fieldToPopulateId2}").value += '\;'+ ccEmails;
+            }
+            
+            if(bccEmails != '--None--' && bccEmails != '') {
+                if(document.getElementById("{!fieldToPopulateId3}").value == '' )      
+                    document.getElementById("{!fieldToPopulateId3}").value = bccEmails;
+                else
+                    document.getElementById("{!fieldToPopulateId3}").value += '\;'+ bccEmails;   
+            }
+            hideAdditionalContactPopup();
+        }
+        </script>
+    </apex:outputPanel>
+    
+    <apex:attribute name="projId" type="String" required="true" assignTo="{!projectId}" description="Name of Account"/>
+    <apex:attribute name="accName" type="String" required="true" assignTo="{!accountName}" description="Name of Account"/>
+    <apex:attribute name="fieldToPopulateId1" type="String" required="true" assignTo="{!fieldPopulatingId1}" description="Id of the Field whose value needs to be populated"/>
+    <apex:attribute name="fieldToPopulateId2" type="String" required="true" assignTo="{!fieldPopulatingId2}" description="Id of the Field whose value needs to be populated"/> 
+    <apex:attribute name="fieldToPopulateId3" type="String" required="true" assignTo="{!fieldPopulatingId3}" description="Id of the Field whose value needs to be populated"/> 
+    
+    <apex:outputPanel id="lookupPanel">
+        <a href="#" id="acc3_lkwgt" onclick="openAdditionalContactPopup();" tabindex="2" title="Parent Lookup (New Window)" style="text-decoration: none;">
+            <img src="/s.gif" alt="Parent Lookup (New Window)" class="lookupIcon" style="vertical-align:top" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" title="Parent Lookup (New Window)" />
+        </a>
+    </apex:outputPanel>
+    
+    <div id="opaqueAdditional"/>
+    <div id="popupcontentAdditional" style="width 100%">            
+        <apex:outputpanel >
+            <div class="lookup">
+                <div class="bPageTitle">
+                    <div class="ptBody secondaryPalette">
+                        <div class="content"><img title="" class="pageTitleIcon"
+                                                  alt="home" src="/s.gif" />
+                            <h1>Email Address Lookup</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <apex:actionFunction action="{!getAdditionalContacts}" name="fillContactsList" rerender="pb,outpanel1,SearchBlock,errorMsg" status="myStatus" immediate="true">
+                <apex:param name="tempId" assignTo="{!selectedOptionValue}" value="" />
+            </apex:actionFunction>
+            <apex:messages />
+            <!-- IE 6.0 hack for single textBox -->
+            <input type="text" style="display: none" />
+            <apex:outputPanel id="top" layout="block" style="margin:5px;padding:10px;padding-top:2px;">
+                <br />
+                <br />
+                <span> Only contacts or co-workers with stored email
+                    addresses are displayed in the box below </span>
+                <apex:pageBlock id="pb" >
+                    <apex:pageBlockSection id="pbs">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel > <Big><b>Show:</b></Big> </apex:outputLabel>
+                            <apex:selectList value="{!selectedOptionValue}" size="1" id="pkShow" onchange="fillContactsList(this.value);">
+                                <apex:selectOptions value="{!selectListOptions}" />
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+                <br />  
+                <apex:outputPanel id="errorMsg" ><apex:messages /></apex:outputPanel>   
+                <apex:pageBlock id="pgblock1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <br/>
+                                <apex:selectList id="accContact" value="{!accContact}" size="20" multiselect="true" style="width:300px;">
+                                    <apex:selectOptions value="{!contactsOption}" />
+                                </apex:selectList>
+                            </div>	
+                            <div class="col-sm-8">    
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <br/>
+                                        <apex:commandButton onclick="listbox_moveacross('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContactAdd','to'); return false;"
+                                                            value=">>" />
+                                        <br/>
+                                        <apex:commandButton onclick="listbox_moveacross('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContactAdd','from');return false;"
+                                                            value="<<" />
+                                    </div>    
+                                    <div class="col-sm-8">    
+                                        <apex:outputLabel > <big><b>Additional To Recipients: </b></big></apex:outputLabel>
+                                        <br/>
+                                        <apex:selectList style="width:200px;height:90px;"
+                                                         id="accContactAdd" value="{!accContact}" size="5"
+                                                         multiselect="true">
+                                            <apex:selectOption itemValue="--None--" itemLabel="--None--" />
+                                        </apex:selectList>
+                                    </div>		
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <br/>
+                                        <apex:commandButton onclick="listbox_moveacross('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContactcc','to'); return false;"
+                                                            value=">>" />
+                                        <br/>
+                                        <apex:commandButton onclick="listbox_moveacross('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContactcc','from'); return false;"
+                                                            value="<<" />
+                                    </div>    
+                                    <div class="col-sm-8">    
+                                        <apex:outputLabel > <big><b>CC Recipients: </b></big></apex:outputLabel>
+                                        <br/>
+                                        <apex:selectList style="width:200px;height:90px;"
+                                                         id="accContactcc" value="{!accContact}" size="5"
+                                                         multiselect="true">
+                                            <apex:selectOption itemValue="--None--" itemLabel="--None--" />
+                                        </apex:selectList>
+                                    </div>	
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <br/>
+                                        <apex:commandButton onclick="listbox_moveacross('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContactbcc','to'); return false;"
+                                                            value=">>" />
+                                        <br/>
+                                        <apex:commandButton onclick="listbox_moveacross('pg:frm:mailContent:j_id91:j_id92:pgblock1:accContactbcc','from'); return false;"
+                                                            value="<<" />
+                                    </div>    
+                                    <div class="col-sm-8">    
+                                        <apex:outputLabel > <b><big>BCC Recipients: </big></b></apex:outputLabel>
+                                        <br/>
+                                        <apex:selectList style="width:200px;height:90px;"
+                                                         id="accContactbcc" value="{!accContact}" size="5"
+                                                         multiselect="true">
+                                            <apex:selectOption itemValue="--None--" itemLabel="--None--" />
+                                        </apex:selectList>
+                                    </div>	
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton value="Save"
+                                            onClick="restoreContactEmails();return false;" />
+                        <apex:commandButton value="Cancel"
+                                            onclick="closeWindow();return false;" />
+                    </apex:pageBlockButtons>
+                </apex:pageBlock>
+            </apex:outputPanel>
+            <apex:outputpanel >
+                <apex:actionstatus id="myStatus">
+                    <apex:facet name="start">
+                        <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                                                                             height: 100%;opacity:0.65;width:100%;z-index:9000;"> 
+                            <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                                <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                                <span class="waitingDescription">Please Wait...</span>
+                            </div>
+                        </div>
+                    </apex:facet>
+                </apex:actionstatus>
+            </apex:outputpanel>
+        </apex:outputpanel>
+    </div>
+</apex:component>

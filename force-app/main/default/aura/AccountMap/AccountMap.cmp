@@ -1,0 +1,11 @@
+<aura:component implements="force:appHostable">
+
+    <ltng:require styles="/resource/leaflet/src/leaflet-search.css"
+                  scripts="/resource/leaflet/leaflet.js"
+                  afterScriptsLoaded="{!c.jsLoaded}" />
+    
+    
+
+    <div class="map" id="map"></div>
+
+</aura:component>

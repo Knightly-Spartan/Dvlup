@@ -1,0 +1,16 @@
+<!--c:eventsNotifier-->
+<aura:component >
+  <aura:attribute name="parentName" type="String"/>
+  <aura:registerEvent name="componentEventFired" type="c:compEvent"/>
+  <aura:registerEvent name="appEvent" type="c:appEvent"/>
+
+  <div>
+    <h3>This is {!v.parentName}'s eventsNotifier.cmp instance</h3>
+    <p><ui:button label="Click here to fire a component event"
+        press="{!c.fireComponentEvent}" />
+    </p>
+    <p><ui:button label="Click here to fire an application event"
+        press="{!c.fireApplicationEvent}" />
+    </p>
+  </div>
+</aura:component>

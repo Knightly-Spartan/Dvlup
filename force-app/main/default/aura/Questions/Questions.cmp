@@ -1,0 +1,42 @@
+<aura:component >
+    
+    <aura:attribute name="Question" type="String" />
+    <aura:attribute name="Answers" type="String[]" />
+    <aura:attribute name="Questions" type="String[]" />
+    <aura:attribute name="questionMap" type="Map" />
+    <aura:attribute name="answerMap" type="Map" />
+    <aura:attribute name="showQuestions" type="Boolean" default="true" />
+    <aura:attribute name="showChart" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <div class="container" style="margin-top:10px;">
+        <select onchange="{!c.changeque}" class="form-control">
+            <aura:iteration items="{!v.Questions}" var="que">
+                <option>{!que}</option>
+            </aura:iteration> 
+        </select> <br/><br/>
+        <div class="panel panel-primary">
+            <div class="panel-heading">{!v.question}</div>
+            <div class="panel-body">
+                <aura:iteration items="{!v.Answers}" var="ans">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" class="answerRadio" name="optionsRadios" id="optionsRadios1" value="{!ans}" onclick="{!c.getVote}"/>
+                            {!ans}
+                        </label>
+                    </div>
+                </aura:iteration> 
+            </div>  <!-- /panel-body -->
+        </div> <!-- /.panel panel-primary -->
+        <div class="panel panel-primary " aura:id="chartPanel">
+            <div class="panel-heading">Graphical Representation</div>
+            <div class="panel-body">
+                <div id="chart" style="display:block-inline">
+                    <div id="chartDiv" style="width:50%; float:left;"></div>
+                    <div id="colChartDiv" style="width:50% ; float:left;"></div>
+                </div><!-- #chart -->
+            </div> <!-- /.panel-body -->
+        </div> <!-- /.panel panel-primary -->
+    </div> <!-- /container -->
+    
+</aura:component>

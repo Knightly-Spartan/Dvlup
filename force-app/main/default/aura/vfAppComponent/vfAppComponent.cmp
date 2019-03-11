@@ -1,0 +1,8 @@
+<aura:component >
+	<aura:registerEvent name="vfAppEvent" type="c:vfAppEvent"/>
+    <div>
+        <ui:InputNumber aura:Id="num1" label="Number 1" value="" />
+        <ui:InputNumber aura:Id="num2" label="Number 2" value="" />
+        <ui:button label="Add Numbers" press="c.sendData"/>
+    </div>
+</aura:component>

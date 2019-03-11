@@ -1,0 +1,49 @@
+<aura:component controller="MyToDoController" >
+    <aura:handler name="init" action="{!c.myAction}" value="{!this}" />
+    <aura:attribute name="tasks" type="Task[]" />
+    <div>
+        <div class="slds-page-header">
+            <div class="slds-media">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+                        <lightning:icon iconName="standard:task" size="medium"/>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="My ToDo List">My ToDo List</h1>
+                    <p class="slds-text-body_small slds-line-height_reset">{!v.tasks.length} total items</p>
+                </div>
+            </div>
+        </div>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_striped">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Subject">Subject</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Status">Status</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Activity Date">Activity Date</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.tasks}" var="task">
+                    <tr>
+                        <th scope="row" data-label="Subject">
+                            <div class="slds-truncate" title="{!task.Subject}">{!task.Subject}</div>
+                        </th>
+                        <td data-label="Status">
+                            <div class="slds-truncate" title="{!task.Status}">{!task.Status}</div>
+                        </td> 
+                        <td data-label="Activity Date">
+                            <div class="slds-truncate" title="{!task.ActivityDate}">{!task.ActivityDate}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

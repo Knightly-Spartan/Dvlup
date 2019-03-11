@@ -1,0 +1,14 @@
+<apex:page controller="ModalLookupController">
+    <apex:form id="frm">
+        <apex:pageBlock title="Modal Lookup">
+            <apex:inputHidden value="{!contactId}" id="contactLookupId" />
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel > Contact Lookup </apex:outputLabel>
+                    <c:CustomLookup objectName="Contact" fieldAPI="Name" fieldToPopulateId="{!$Component.contactLookupId}" fieldSetName="FieldsForModalLookup" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+
+</apex:page>

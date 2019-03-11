@@ -1,0 +1,31 @@
+<apex:page controller="ShoppingController">
+    <apex:form id="frm">
+    <apex:pageMessages id="err"/>
+        <apex:pageBlock title="Products">
+            <apex:actionFunction name="addToCart" action="{!addToCart}"/>
+            <apex:pageBlockButtons >
+                    <apex:commandButton value="{!cartVal}" action="{!goToCart}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+                <apex:pageBlockTable value="{!products}" var="pitem" id="prodTable">
+                    <apex:column headerValue="Product">
+                        <apex:outputText value="{!pitem.name}"/>
+                    </apex:column>
+                    <apex:column headerValue="Price">
+                        <apex:outputText value="{0,number,currency}">
+                            <apex:param value="{!pitem.price}"/>
+                        </apex:outputText>
+                    </apex:column>
+                    <apex:column headerValue="Add To Cart">
+                        <apex:commandButton value="Add to Cart" action="{!addToCart}" reRender="frm,err">
+                            <apex:param name="addToCartParam" value="{!pitem.id}" assignTo="{!prodIdChosen}"/>
+                        </apex:commandButton>
+                    </apex:column>
+                    <apex:column headerValue="In Cart">
+                        <apex:outputText value="{!pitem.inCart}"/>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

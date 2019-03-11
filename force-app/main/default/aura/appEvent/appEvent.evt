@@ -1,0 +1,5 @@
+<!--c:appEvent-->
+<aura:event type="APPLICATION">
+    <!-- pass context of where the event was fired to the handler. -->
+    <aura:attribute name="context" type="String"/>
+</aura:event>

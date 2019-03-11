@@ -1,0 +1,247 @@
+<apex:page showHeader="false" sideBar="false" tabStyle="Contact" id="pg"
+           controller="LookupAdditionContactsController" title="Search">
+    
+    <SCRIPT>
+        
+        function listbox_moveacross(sourceID,toFrom) {
+        var src; 
+        var dest;
+        var move = 'false' ;
+        
+        // check for the destination and source to move data
+        if(toFrom == 'to') {
+        src = document.getElementById('pg:frm:pgblock1:pgsection1:pgsection1Item1:accContact');
+        dest = document.getElementById(sourceID);
+        }else if(toFrom == 'from') {
+        src = document.getElementById(sourceID);
+        dest = document.getElementById('pg:frm:pgblock1:pgsection1:pgsection1Item1:accContact');
+        }
+        
+        // check if any item is selected to move
+        for(var count=0; count < src.options.length; count++) {
+        if(src.options[count].selected == true)
+        move = 'true' ;
+        }
+        
+        // if no item is selected or source contains '--None' or souce contains no data then do nothing
+        if(move == 'false' || src.options[0].text == '--None--'|| src.options.length<=0 );
+        else {
+        for(var count=0; count < src.options.length; count++) {
+        // move data from source to destination
+        if(src.options[count].selected == true) {
+        var option = src.options[count];
+        var newOption = document.createElement("option");
+        newOption.value = option.value;
+        newOption.text = option.text;
+        newOption.selected = true;
+        try {
+        dest.add(newOption, null); //Standard
+        src.remove(count, null);
+        }catch(error) {
+        dest.add(newOption); // IE only
+        src.remove(count);
+        }
+        count--;
+        }
+        }
+        // if destination contains '--None--' remove it.
+        if(dest.options[0].text == '--None--'){
+        dest.remove(0);
+        }
+        
+        
+        }
+        // if all data is moved from source to destination show '--None--' in source.
+        if(src.options.length <= 0){
+        var newOption = document.createElement("option");
+        newOption.value = '--None--';
+        newOption.text = '--None--';
+        src.add(newOption, null);
+        }
+        }
+        
+        function restoreContactEmails(){
+        var  addContactEmails = document.getElementById('pg:frm:pgblock1:pgsection1:pgsection1Item5:accContactAdd');
+        var  ccContactEmails = document.getElementById('pg:frm:pgblock1:pgsection1:pgsection1Item6:accContactcc');
+        var  bccCOntactEmails = document.getElementById('pg:frm:pgblock1:pgsection1:pgsection1Item7:accContactbcc');
+        var addEmails = getEmails(addContactEmails);
+        var ccEmails= getEmails(ccContactEmails);
+        var bccEmails = getEmails(bccCOntactEmails);
+        
+        if(addEmails != '--None--' && addEmails != '') {
+        if(top.window.opener.document.getElementById("pg:frm:mailContent:pgsection1:additionalToItem:additionalTo").value == '') {
+        top.window.opener.document.getElementById("pg:frm:mailContent:pgsection1:additionalToItem:additionalTo").value = addEmails;
+        }
+        else 
+        top.window.opener.document.getElementById("pg:frm:mailContent:pgsection1:additionalToItem:additionalTo").value += '\;'+addEmails;
+        }
+        
+        if(ccEmails != '--None--' && ccEmails != '') {
+        if(top.window.opener.document.getElementById("pg:frm:mailContent:pgsection1:ccEmailsToItem:ccEmailsTo").value == '')      
+        top.window.opener.document.getElementById("pg:frm:mailContent:pgsection1:ccEmailsToItem:ccEmailsTo").value = ccEmails;
+        else 
+        top.window.opener.document.getElementById("pg:frm:mailContent:pgsection1:ccEmailsToItem:ccEmailsTo").value += '\;'+ ccEmails;
+        }
+        
+        if(bccEmails != '--None--' && bccEmails != '') {
+        if(top.window.opener.document.getElementById("pg:frm:mailContent:pgsection1:bccEmailsToItem:bccEmailsTo").value == '' )      
+        top.window.opener.document.getElementById("pg:frm:mailContent:pgsection1:bccEmailsToItem:bccEmailsTo").value = bccEmails;
+        else
+        top.window.opener.document.getElementById("pg:frm:mailContent:pgsection1:bccEmailsToItem:bccEmailsTo").value += '\;'+ bccEmails;   
+        }
+        window.close();
+        }
+        
+        function getEmails(ListBoxEmail){
+        var emails;
+        for(var count=0; count < ListBoxEmail.options.length; count++) {
+        var option = ListBoxEmail.options[count];
+        if(count == 0){
+        emails = option.value;
+        }else {
+        emails += '\;'+ option.value;
+        }
+        }
+        return emails;
+        }
+        
+        function closeWindow(){
+        window.close();
+        }   
+    </SCRIPT>
+    
+    <body class="lookupTab">
+        <apex:outputpanel >
+            <div class="lookup">
+                <div class="bPageTitle">
+                    <div class="ptBody secondaryPalette">
+                        <div class="content"><img title="" class="pageTitleIcon"
+                                                  alt="home" src="/s.gif" />
+                            <h1>Email Address Lookup</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <apex:form id="frm">
+                
+                <apex:actionFunction action="{!getAdditionalContacts}" name="fillContactsList" rerender="pb,outpanel1,SearchBlock,errorMsg" status="myStatus" immediate="true">
+                    <apex:param name="tempId" assignTo="{!selectedOptionValue}" value="" />
+                </apex:actionFunction>
+                <apex:messages />
+                <!-- IE 6.0 hack for single textBox -->
+                <input type="text" style="display: none" />
+                <apex:outputPanel id="top" layout="block"
+                                  style="margin:5px;padding:10px;padding-top:2px;">
+                    <br />
+                    <br />
+                    <span> Only contacts or co-workers with stored email
+                        addresses are displayed in the box below </span>
+                    <apex:pageBlock id="pb" >
+                        <apex:pageBlockSection id="pbs">
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel > <Big><b>Show:</b></Big> </apex:outputLabel>
+                                <apex:selectList value="{!selectedOptionValue}" size="1" id="pkShow" onchange="fillContactsList(this.value);">
+                                    <apex:selectOptions value="{!selectListOptions}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                    <br />  
+                    <apex:outputPanel id="errorMsg" ><apex:messages /></apex:outputPanel>   
+                    <apex:pageBlock id="pgblock1">
+                        <apex:pageBlockSection id="pgsection1" columns="3">
+                            <apex:pageBlockSectionItem id="pgsection1Item1">
+                                <apex:outputpanel id="outpanel1">
+                                    <apex:selectList id="accContact" value="{!accContact}" size="20" multiselect="true" style="width:300px;">
+                                        <apex:selectOptions value="{!contactsOption}" />
+                                    </apex:selectList>
+                                </apex:outputpanel> 
+                            </apex:pageBlockSectionItem>
+                            <apex:outputPanel >
+                                <br />
+                                <br />
+                                <apex:pageBlockSectionItem id="pgsection1Item2">
+                                    <apex:commandButton onclick="listbox_moveacross('pg:frm:pgblock1:pgsection1:pgsection1Item5:accContactAdd','to'); return false;"
+                                                        value=">>" />
+                                    <apex:commandButton onclick="listbox_moveacross('pg:frm:pgblock1:pgsection1:pgsection1Item5:accContactAdd','from');return false;"
+                                                        value="<<" />
+                                </apex:pageBlockSectionItem>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <apex:pageBlockSectionItem id="pgsection1Item3">
+                                    <apex:commandButton onclick="listbox_moveacross('pg:frm:pgblock1:pgsection1:pgsection1Item6:accContactcc','to'); return false;"
+                                                        value=">>" />
+                                    
+                                    <apex:commandButton onclick="listbox_moveacross('pg:frm:pgblock1:pgsection1:pgsection1Item6:accContactcc','from'); return false;"
+                                                        value="<<" />
+                                    
+                                </apex:pageBlockSectionItem>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <apex:pageBlockSectionItem id="pgsection1Item4">
+                                    <apex:commandButton onclick="listbox_moveacross('pg:frm:pgblock1:pgsection1:pgsection1Item7:accContactbcc','to'); return false;"
+                                                        value=">>" />
+                                    
+                                    <apex:commandButton onclick="listbox_moveacross('pg:frm:pgblock1:pgsection1:pgsection1Item7:accContactbcc','from'); return false;"
+                                                        value="<<" />
+                                    
+                                </apex:pageBlockSectionItem>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel >
+                                <apex:pageBlockSectionItem id="pgsection1Item5">
+                                    <apex:outputLabel > <big><b>Additional To Recipients: </b></big></apex:outputLabel>
+                                    <apex:selectList style="width:200px;height:90px;"
+                                                     id="accContactAdd" value="{!accContact}" size="5"
+                                                     multiselect="true">
+                                        <apex:selectOption itemValue="--None--" itemLabel="--None--" />
+                                    </apex:selectList>
+                                </apex:pageBlockSectionItem>
+                                <apex:pageBlockSectionItem id="pgsection1Item6">
+                                    <apex:outputLabel > <big><b>CC Recipients: </b></big></apex:outputLabel>
+                                    <apex:selectList style="width:200px;height:90px;"
+                                                     id="accContactcc" value="{!accContact}" size="5"
+                                                     multiselect="true">
+                                        <apex:selectOption itemValue="--None--" itemLabel="--None--" />
+                                    </apex:selectList>
+                                </apex:pageBlockSectionItem>
+                                <apex:pageBlockSectionItem id="pgsection1Item7">
+                                    <apex:outputLabel > <b><big>BCC Recipients: </big></b></apex:outputLabel>
+                                    <apex:selectList style="width:200px;height:90px;"
+                                                     id="accContactbcc" value="{!accContact}" size="5"
+                                                     multiselect="true">
+                                        <apex:selectOption itemValue="--None--" itemLabel="--None--" />
+                                    </apex:selectList>
+                                </apex:pageBlockSectionItem>
+                            </apex:outputPanel>
+                        </apex:pageBlockSection>
+                        <apex:pageBlockButtons location="bottom">
+                            <apex:commandButton value="Save"
+                                                onClick="restoreContactEmails();return false;" />
+                            <apex:commandButton value="Cancel"
+                                                onclick="javascript: closeWindow();" />
+                        </apex:pageBlockButtons>
+                    </apex:pageBlock>
+                </apex:outputPanel>
+            </apex:form>
+            <apex:outputpanel >
+                <apex:actionstatus id="myStatus">
+                    <apex:facet name="start">
+                        <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                                                                             height: 100%;opacity:0.65;width:100%;z-index:9000;"> 
+                            <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                                <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                                <span class="waitingDescription">Please Wait...</span>
+                            </div>
+                        </div>
+                    </apex:facet>
+                </apex:actionstatus>
+            </apex:outputpanel>
+        </apex:outputpanel>
+    </body>
+</apex:page>

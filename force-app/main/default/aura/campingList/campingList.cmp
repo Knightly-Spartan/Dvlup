@@ -1,0 +1,38 @@
+<aura:component controller="CampingListController">
+    
+    <ltng:require styles="/resource/SLDS105/assets/styles/salesforce-lightning-design-system-ltng.css"/>
+
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+     <aura:attribute name="newItem" type="Camping_Item__c"
+     default="{ 'sobjectType': 'Camping_Item__c',
+                    'Price__c': 0,
+                    'Quantity__c': 0}"/>
+    
+    <div class="slds-card slds-p-top--medium">
+    <ui:inputText aura:id="campname" label="Camping Name"
+        value="{!v.newItem.Name}" required="true"/>
+    <ui:inputCheckbox aura:id="packed" label="Packed?"
+        value="{!v.newItem.Packed__c}"/>
+     <ui:inputCurrency aura:id="price" label="Price"
+        value="{!v.newItem.Price__c}" required="true"/>
+     <ui:inputNumber aura:id="quantity" label="Quantity"
+        value="{!v.newItem.Quantity__c}" required="true"/>
+    
+    <ui:button label="Create Camping" press="{!c.clickCreateCamping}"/>
+    </div>
+    
+    <aura:attribute name="items" type="Camping_Item__c[]"/>	 
+    <div class="slds-card slds-p-top--medium">
+        <header class="slds-card__header">
+            <h3 class="slds-text-heading--small">Campings</h3>
+        </header>
+        <section class="slds-card__body">
+            <div id="list" class="row">
+                <aura:iteration items="{!v.items}" var="item">
+                    <c:campingListItem item="{!item}"/>
+                </aura:iteration>
+            </div>
+        </section>
+    </div>
+</aura:component>

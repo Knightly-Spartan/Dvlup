@@ -1,0 +1,36 @@
+<apex:page controller="EmailTemplateController" showHeader="false" sidebar="false">
+    <apex:form >
+
+    <script>
+        function selectTemplate(templateId)
+        {
+            var strLocation = window.opener.location.href;
+            var toIndex = strLocation.indexOf('?');
+            if(toIndex == -1)
+                toIndex = strLocation.length;
+            strLocation = strLocation.substring(0, toIndex);
+            window.opener.UseEmailTemplate(templateId);
+            window.close();
+        }
+    </script>
+        <apex:actionFunction action="{!getEmailTemplateList}" name="GetTemplate" rerender="EmailTemplates">
+        </apex:actionFunction>
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="1">
+                Template From:
+                <apex:selectList value="{!templateFolderName}" size="1" onChange="javascript:GetTemplate();">
+                    <apex:selectOptions value="{!templateFolderOption}" />
+                </apex:selectList>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock title="Email Templates" id="EmailTemplates">
+            <apex:pageBlockTable value="{!lsEmail}" var="email">
+                <apex:column headerValue="Name">
+                    <apex:commandLink value="{!email.Name}" onclick="javascript:var id = '{!email.id}'; selectTemplate('{!email.id}');"/>
+                </apex:column>
+                <apex:column headerValue="Type" value="{!email.TemplateType}"/>
+                <apex:column headerValue="Description" value="{!email.Description}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

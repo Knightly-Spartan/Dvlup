@@ -1,0 +1,18 @@
+<aura:component access="global">
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'Option 1', 'value': 'Option 1'},
+                                                        {'label': 'Option 2', 'value': 'Option 2'},
+                                                        {'label': 'Option 3', 'value': 'Option 3'}
+                                                        
+                                                        ]"/>
+    <aura:attribute name="checkboxValue" type="List"/>
+    <aura:handler name="change" value="{!v.checkboxValue}" action="{!c.checkboxHandler}"/>
+    
+    <div class="slds-form--stacked" style="padding:10px;">
+        <lightning:checkboxGroup aura:id="mygroup"
+                                 name="checkboxGroup"
+                                 label="Checkbox Group"
+                                 options="{! v.options }"
+                                 value="{! v.checkboxValue }"/>
+    </div>
+</aura:component>
