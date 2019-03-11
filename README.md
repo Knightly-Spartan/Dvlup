@@ -1,2 +1,9 @@
-# Dvlup
-A copy of my developer edition. Spartan-dev-ed.
+# SFDX App
+
+## Dev, Build and Test
+
+## Resources
+
+## Description of Files and Directories
+
+## Issues
