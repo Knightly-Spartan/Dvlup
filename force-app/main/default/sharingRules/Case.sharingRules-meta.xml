@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>View_Cases</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Give &quot;Priority Case Handler&quot; Group access to view Generic Cases</description>
+        <label>View Cases</label>
+        <sharedTo>
+            <group>Priority_Cases</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Generic_Case_Handler</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

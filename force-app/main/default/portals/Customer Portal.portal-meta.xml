@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Portal xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <admin>amitsanwariya@outlook.com</admin>
+    <description>Customer Portal</description>
+    <emailSenderAddress>amitsanwariya@outlook.com</emailSenderAddress>
+    <emailSenderName>amitsanwariya@outlook.com</emailSenderName>
+    <enableSelfCloseCase>false</enableSelfCloseCase>
+    <forgotPassTemplate>unfiled$public/CustomerPortalChangePwdEmail</forgotPassTemplate>
+    <isSelfRegistrationActivated>true</isSelfRegistrationActivated>
+    <newPassTemplate>unfiled$public/CustomerPortalChangePwdEmail</newPassTemplate>
+    <newUserTemplate>unfiled$public/CustomerPortalNewUserEmail</newUserTemplate>
+    <selfRegUserDefaultProfile>customer portal manager custom</selfRegUserDefaultProfile>
+    <selfRegUserDefaultRole>Worker</selfRegUserDefaultRole>
+    <selfRegUserTemplate>unfiled$public/CustomerPortalSelfRegUserEmail</selfRegUserTemplate>
+    <showActionConfirmation>false</showActionConfirmation>
+    <type>CustomerSuccess</type>
+</Portal>

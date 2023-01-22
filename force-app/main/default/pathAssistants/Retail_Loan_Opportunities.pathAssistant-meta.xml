@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <entityName>Opportunity</entityName>
+    <fieldName>StageName</fieldName>
+    <masterLabel>Retail Loan Opportunities</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>AccountId</fieldNames>
+        <fieldNames>Amount</fieldNames>
+        <fieldNames>LeadSource</fieldNames>
+        <fieldNames>MainCompetitors__c</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <info>&lt;strong&gt;Verify that the account has no outstanding cases&lt;/strong&gt;</info>
+        <picklistValueName>Prospecting</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

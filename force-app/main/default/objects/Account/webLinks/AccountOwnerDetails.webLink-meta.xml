@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AccountOwnerDetails</fullName>
+    <availability>online</availability>
+    <displayType>link</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>AccountOwnerDetails</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var accId = &apos;{!Account.Id}&apos;;
+window.location.href = &apos;/apex/AccountOwnerDetails?aId=&apos; + accId;</url>
+</WebLink>

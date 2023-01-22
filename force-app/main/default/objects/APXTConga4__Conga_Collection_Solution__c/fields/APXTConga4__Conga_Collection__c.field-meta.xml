@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>APXTConga4__Conga_Collection__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Conga Collection</label>
+    <referenceTo>APXTConga4__Conga_Collection__c</referenceTo>
+    <relationshipLabel>Conga Collection Solutions</relationshipLabel>
+    <relationshipName>Conga_Collection_Solutions</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>APXTConga4__Advanced_Editor</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>800</height>
+    <linkType>url</linkType>
+    <masterLabel>Advanced Editor</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>/apex/APXTConga4__Conga_Composer
+?ServerUrl={!$Api.Partner_Server_URL_290}
+&amp;Id={!APXTConga4__Conga_Email_Template__c.Id}
+&amp;uiscreen=emaileditor
+&amp;isLoaderAbsolute=1
+&amp;showHeader=1
+&amp;showSidebar=1</url>
+</WebLink>

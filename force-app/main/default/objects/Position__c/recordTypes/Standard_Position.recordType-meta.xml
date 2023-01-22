@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Standard_Position</fullName>
+    <active>true</active>
+    <description>Record type for all non-IT positions</description>
+    <label>Standard Position</label>
+    <picklistValues>
+        <picklist>Functional_Area__c</picklist>
+        <values>
+            <fullName>Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Human Resources</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Miscellaneous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retail Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Warehousing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Job_Level__c</picklist>
+        <values>
+            <fullName>FN-100</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FN-200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FN-300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FN-400</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HR-100</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HR-200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HR-300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HR-400</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IT-100</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IT-200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IT-300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IT-400</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MC-100</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MC-200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MC-300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MC-400</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RO-100</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RO-200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RO-300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RO-400</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WH-100</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WH-200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WH-300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WH-400</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Location__c</picklist>
+        <values>
+            <fullName>Austin%2C TX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boulder%2C CO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>London%2C England</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mumbai%2C India</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New York%2C NY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>San Francisco%2C CA</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Sydney%2C Australia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tokyo%2C Japan</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Closed - Canceled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed - Filled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed - Not Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Position</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Open - Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Approval</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Contractor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Full Time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Part Time</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

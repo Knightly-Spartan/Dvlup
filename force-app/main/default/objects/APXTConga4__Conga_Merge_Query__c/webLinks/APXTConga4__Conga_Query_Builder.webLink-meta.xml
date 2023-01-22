@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>APXTConga4__Conga_Query_Builder</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Conga Query Builder</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>/apex/APXTConga4__Conga_Composer
+?ServerUrl={!$Api.Partner_Server_URL_370}
+&amp;uiscreen=qb
+&amp;id={!APXTConga4__Conga_Merge_Query__c.Id}
+&amp;isLoaderAbsolute=1
+&amp;showHeader=1
+&amp;showSidebar=1</url>
+</WebLink>

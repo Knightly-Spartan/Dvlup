@@ -1,0 +1,23 @@
+<apex:page controller="ActionSupportExController">
+    <apex:form >
+        <apex:outputpanel id="counter">
+        <apex:actionRegion >
+        	<apex:outputpanel id="counter2">
+            <apex:outputText value="Click Me!: {!count}"/>
+            <apex:actionSupport event="onclick" 
+                                action="{!incrementCounter}" 
+                                rerender="counter2" status="status"/>
+            </apex:outputpanel>
+        </apex:actionRegion>
+            
+        </apex:outputpanel>
+        <apex:actionStatus id="status">
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <img src="/img/loading32.gif" width="25" height="25" />
+                    <apex:outputLabel value="Loading..."/>
+                </apex:outputPanel>            
+            </apex:facet>
+        </apex:actionStatus>
+    </apex:form>
+</apex:page>

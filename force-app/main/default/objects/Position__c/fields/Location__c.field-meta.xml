@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Location__c</fullName>
+    <externalId>false</externalId>
+    <label>Location</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>San Francisco, CA</fullName>
+                <default>true</default>
+                <label>San Francisco, CA</label>
+            </value>
+            <value>
+                <fullName>Austin, TX</fullName>
+                <default>false</default>
+                <label>Austin, TX</label>
+            </value>
+            <value>
+                <fullName>Boulder, CO</fullName>
+                <default>false</default>
+                <label>Boulder, CO</label>
+            </value>
+            <value>
+                <fullName>London, England</fullName>
+                <default>false</default>
+                <label>London, England</label>
+            </value>
+            <value>
+                <fullName>New York, NY</fullName>
+                <default>false</default>
+                <label>New York, NY</label>
+            </value>
+            <value>
+                <fullName>Mumbai, India</fullName>
+                <default>false</default>
+                <label>Mumbai, India</label>
+            </value>
+            <value>
+                <fullName>Sydney, Australia</fullName>
+                <default>false</default>
+                <label>Sydney, Australia</label>
+            </value>
+            <value>
+                <fullName>Tokyo, Japan</fullName>
+                <default>false</default>
+                <label>Tokyo, Japan</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

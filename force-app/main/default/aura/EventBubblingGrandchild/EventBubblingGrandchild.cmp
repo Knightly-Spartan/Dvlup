@@ -1,0 +1,9 @@
+<aura:component>
+    <aura:handler name="bubblingEvent" event="c:compEvent" action="{!c.handleBubbling}"/>
+
+    <lightning:card title="Grandchild">
+        <p class="slds-p-horizontal_small">
+        	<c:EventBubblingEmitter />
+        </p>
+    </lightning:card>
+</aura:component>

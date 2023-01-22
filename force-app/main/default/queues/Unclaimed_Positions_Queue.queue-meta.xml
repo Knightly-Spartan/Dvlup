@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <email>recruiters@universalcontainers.com</email>
+    <name>Unclaimed Positions Queue</name>
+    <queueMembers>
+        <roleAndSubordinates>
+            <roleAndSubordinate>Recruiting_Manager</roleAndSubordinate>
+        </roleAndSubordinates>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Position__c</sobjectType>
+    </queueSobject>
+</Queue>

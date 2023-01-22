@@ -1,0 +1,11 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+	<aura:handler name="bubblingEvent" event="c:compEvent" action="{!c.handleBubbling}"/>
+    
+    <lightning:card title="Parent">
+        <p class="slds-p-horizontal_small">
+            <c:EventBubblingChild>
+                <c:EventBubblingGrandchild />
+            </c:EventBubblingChild>
+        </p>
+    </lightning:card>
+</aura:component>

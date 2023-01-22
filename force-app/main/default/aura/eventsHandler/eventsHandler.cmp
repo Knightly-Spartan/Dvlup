@@ -7,12 +7,11 @@
 
   <aura:handler event="c:appEvent" action="{!c.handleApplicationEventFired}"/>
   <aura:handler name="componentEventFired" event="c:compEvent" action="{!c.handleComponentEventFired}"/>
-
-  <div>
-    <h3>This is {!v.name}</h3>
-    <p>{!v.mostRecentEvent}</p>
-    <p># component events handled: {!v.numComponentEventsHandled}</p>
-    <p># application events handled: {!v.numApplicationEventsHandled}</p>
-    <c:eventsNotifier parentName="{#v.name}" />
-  </div>
+  <lightning:card title="{!'This is component: ' + v.name}">
+      <p class="slds-p-horizontal_small">{!v.mostRecentEvent}<br/>
+          # component events handled: {!v.numComponentEventsHandled}<br/>
+          # application events handled: {!v.numApplicationEventsHandled}
+      </p>
+      <c:eventsNotifier parentName="{#v.name}" />
+  </lightning:card>
 </aura:component>

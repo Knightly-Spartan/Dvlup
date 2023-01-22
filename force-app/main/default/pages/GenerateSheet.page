@@ -1,0 +1,14 @@
+<apex:page Controller="GenerateSheetController" lightningStylesheets="true" showheader="false">  <!--contenttype="application/vnd.ms-excel#ContactSheet.xls"-->
+    <apex:form >
+        <apex:pageBlock >
+        <apex:pageBlockTable value="{!recordsMap}" var="key">
+            <apex:repeat value="{!recordsMap[key]}" var="record">
+                <apex:column value="{!record['Name']}" />
+            </apex:repeat>
+        </apex:pageBlockTable>
+        <!--apex:pageblocktable value="{!recordsMap}" var="key">
+        	<apex:column value="{!MapName[key].}"/>
+        </apex:pageblocktable-->
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

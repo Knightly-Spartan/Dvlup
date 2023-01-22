@@ -1,0 +1,32 @@
+<apex:page standardController="Account" extensions="FirstVFPageController">
+    <script>
+    	function toggleJS() {
+            console.log('IN the JS function');
+            toggleAF();
+        }
+    	function afterToggle() {
+            console.log('after the Toggle server side action');
+        }
+    </script>
+    <apex:form id="frm">
+        <apex:pageMessages id="pgMsg"/>
+        <apex:actionFunction name="toggleAF" action="{!toggleDetails}" oncomplete="afterToggle();" status="status" rerender="pgMsg,pgBlock"/>
+        <apex:pageBlock title="Account" id="pgBlock">
+            
+            <c:FirstVFComponent AccAttribute="{!Account.Id}" rendered="{!showDetails}"/>
+            
+            <apex:actionStatus id="status">
+                <apex:facet name="start">
+                    <apex:outputPanel >
+                        <img src="/img/loading32.gif" width="25" height="25" />
+                        <apex:outputLabel value="Loading..."/>
+                    </apex:outputPanel>            
+                </apex:facet>
+            </apex:actionStatus>
+            <apex:pageBlockButtons >
+                <apex:commandLink value="Toggle Details" action="{!toggleDetails}" status="status" rerender="pgMsg,pgBlock"/>
+                <input type="button" value="Custom Toggle" onclick="toggleJS();"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

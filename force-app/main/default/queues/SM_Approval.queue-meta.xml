@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>SM Approval</name>
+    <queueMembers>
+        <users>
+            <user>amitsanwariya@outlook.com</user>
+            <user>integration@00d280000017edpeay.com</user>
+            <user>insightssecurity@00d280000017edpeay.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Job_Application__c</sobjectType>
+    </queueSobject>
+</Queue>

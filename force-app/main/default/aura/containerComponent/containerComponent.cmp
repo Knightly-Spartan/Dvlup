@@ -1,5 +1,6 @@
-<!--c:eventsContainer-->
-<aura:component >
-    <c:eventsHandler name="eventsHandler1"/>
-    <c:eventsHandler name="eventsHandler2"/>
+<aura:component implements="flexipage:availableForAllPageTypes">
+    <lightning:card title="Aura Events">
+        <c:eventsHandler name="eventsHandler1"/>
+        <c:eventsHandler name="eventsHandler2"/>
+    </lightning:card>
 </aura:component>

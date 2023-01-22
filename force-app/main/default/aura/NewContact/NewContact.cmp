@@ -1,0 +1,4 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,lightning:actionOverride,lightning:hasPageReference" >
+    <aura:handler name="change" action="{!c.doInit}" value="{!v.pageReference}" />
+    <aura:attribute name="accId" type="string"/>
+</aura:component>

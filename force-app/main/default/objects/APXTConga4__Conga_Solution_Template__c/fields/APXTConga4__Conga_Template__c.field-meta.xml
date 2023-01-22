@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>APXTConga4__Conga_Template__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Conga Template</label>
+    <referenceTo>APXTConga4__Conga_Template__c</referenceTo>
+    <relationshipLabel>Conga Solution Templates</relationshipLabel>
+    <relationshipName>Conga_Solution_Templates</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

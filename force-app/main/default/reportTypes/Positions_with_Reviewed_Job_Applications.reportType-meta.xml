@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Position__c</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description>Which positions have job applications that have been reviewed?</description>
+    <join>
+        <join>
+            <outerJoin>false</outerJoin>
+            <relationship>Reviews__r</relationship>
+        </join>
+        <outerJoin>false</outerJoin>
+        <relationship>Job_Applications__r</relationship>
+    </join>
+    <label>Positions with Reviewed Job Applications</label>
+    <sections>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Position__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Position Created By</displayNameOverride>
+            <field>CreatedBy</field>
+            <table>Position__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Position Created Date</displayNameOverride>
+            <field>CreatedDate</field>
+            <table>Position__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Days_Open__c</field>
+            <table>Position__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Functional_Area__c</field>
+            <table>Position__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hire_By__c</field>
+            <table>Position__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Hiring_Manager__c</field>
+            <table>Position__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Position Status</displayNameOverride>
+            <field>Status__c</field>
+            <table>Position__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Travel_Required__c</field>
+            <table>Position__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Position__c.Job_Applications__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Average_Rating__c</field>
+            <table>Position__c.Job_Applications__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Job Application Created By</displayNameOverride>
+            <field>CreatedBy</field>
+            <table>Position__c.Job_Applications__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Job Application Created Date</displayNameOverride>
+            <field>CreatedDate</field>
+            <table>Position__c.Job_Applications__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Number_of_Reviews__c</field>
+            <table>Position__c.Job_Applications__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Job Application Status</displayNameOverride>
+            <field>Status__c</field>
+            <table>Position__c.Job_Applications__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Position__c.Job_Applications__r.Reviews__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Review Created By</displayNameOverride>
+            <field>CreatedBy</field>
+            <table>Position__c.Job_Applications__r.Reviews__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Review Created Date</displayNameOverride>
+            <field>CreatedDate</field>
+            <table>Position__c.Job_Applications__r.Reviews__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Rating__c</field>
+            <table>Position__c.Job_Applications__r.Reviews__r</table>
+        </columns>
+        <masterLabel>Position, Job Application, and Review Fields</masterLabel>
+    </sections>
+</ReportType>

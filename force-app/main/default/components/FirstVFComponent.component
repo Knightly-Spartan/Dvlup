@@ -1,0 +1,13 @@
+<apex:component controller="FirstVFComponentController">
+    <apex:attribute name="AccAttribute" type="String" description="Account Records" assignTo="{!accId}"/>
+    <apex:outputPanel id="pgBlockSection">
+        <apex:pageBlockSection >
+            <apex:repeat value="{!$ObjectType.Account.FieldSets.FirstVFPage}" var="field">
+                <apex:outputField label="{!IF(BEGINS(field.Label, 'Account'), 
+                                         RIGHT(field.Label, LEN(field.Label)-8), 
+                                         field.Label)}" 
+                                  value="{!acc[field]}"/>
+            </apex:repeat>
+        </apex:pageBlockSection>
+    </apex:outputPanel>
+</apex:component>

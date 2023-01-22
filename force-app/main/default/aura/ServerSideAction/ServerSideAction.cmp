@@ -1,0 +1,24 @@
+<aura:component controller="ServerSideActionController" implements="flexipage:availableForAllPageTypes">
+    <aura:attribute name="searchKey" type="String" />
+    <aura:attribute name="accounts" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <lightning:card title="Aura Events">
+        <p class="slds-p-horizontal_small">
+            <lightning:input name="searchString" label="Enter name to search Accounts" 
+                             value="{!v.searchKey}" onchange="{!c.search}"/>
+            <aura:if isTrue="{!not(empty(v.accounts))}">
+                <lightning:datatable
+                    keyField="id"
+                    data="{!v.accounts}"
+                    columns="{!v.columns}"
+                	hideCheckboxColumn="true"/>
+                <aura:set attribute="else">
+                    <p>No matching records found</p>
+                </aura:set>
+            </aura:if>
+        </p>
+    </lightning:card>
+</aura:component>

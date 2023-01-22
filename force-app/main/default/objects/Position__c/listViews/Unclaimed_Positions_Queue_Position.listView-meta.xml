@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unclaimed_Positions_Queue_Position</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Unclaimed Positions Queue</label>
+    <queue>Unclaimed_Positions_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

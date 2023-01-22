@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>APXTConga4__Is_SF1_Enabled__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>If this field is checked, this collections will be used by the Composermerge.cmp for one sObject type.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If use this collection for SalesForce 1.</inlineHelpText>
+    <label>Is_SF1_Enabled</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

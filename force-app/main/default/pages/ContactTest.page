@@ -1,0 +1,13 @@
+<apex:page standardController="Contact" showHeader="true" sidebar="true">
+    <apex:sectionHeader title="Contact" subtitle="{!Contact.Name}"/>
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <apex:outputField value="{!Contact.FirstName}"/>
+            <apex:outputField value="{!Contact.LastName}"/>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Owner's Email"/>
+                <apex:outputField value="{!Contact.Owner.Email}"/>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

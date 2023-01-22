@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disable_Reparenting_for_Candidates</fullName>
+    <active>true</active>
+    <description>Disallows reparenting of Job Application for Candidates</description>
+    <errorConditionFormula>IF( !ISBLANK(  Candidate__c  )  &amp;&amp;  ISCHANGED(  Candidate__c  ) , true, false)</errorConditionFormula>
+    <errorDisplayField>Candidate__c</errorDisplayField>
+    <errorMessage>Reparenting of Job Applications can not be done for Candidate</errorMessage>
+</ValidationRule>

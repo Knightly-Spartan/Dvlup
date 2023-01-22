@@ -1,0 +1,44 @@
+<apex:page standardController="Account" extensions="MySecondVFPageExtension" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="{!Account.Name}">
+            <apex:pageMessages />
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton action="{!toggleRelatedList}" value="Switch Related List"/>
+            </apex:pageBlockButtons>
+            
+            <!--Account Details Section-->
+            <apex:pageBlockSection title="Account Details" columns="1">
+                <apex:outputField value="{!Account.Name}"/>
+                <apex:outputField value="{!Account.AccountNumber}"/>
+                <apex:outputField value="{!Account.Phone}"/>
+                <apex:outputField value="{!Account.Active__c}"/>
+            </apex:pageBlockSection>
+            
+            <!--Custom Related List-->
+            <apex:outputPanel rendered="{!NOT(switchRelatedList)}">
+                <apex:pageBlockTable value="{!contacts}" var="con">
+                    <apex:column value="{!con.FirstName}"/>
+                    <apex:column value="{!con.LastName}"/>
+                    <apex:column value="{!con.Email}"/>
+                </apex:pageBlockTable>
+            </apex:outputPanel>
+            <!--Custom Related List-->
+            <apex:outputPanel rendered="{!NOT(switchRelatedList)}">
+                <table class="list">
+                    <tr class="headerRow">
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                    </tr>
+                    <apex:repeat value="{!contacts}" var="con">
+                        <tr class="dataRow">
+                            <td class="dataCell">{!con.FirstName}</td>
+                            <td class="dataCell">{!con.LastName}</td>
+                            <td class="dataCell">{!con.Email}</td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

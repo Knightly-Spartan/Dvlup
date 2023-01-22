@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>APXTConga4__Master_Field_to_Set_1__c</fullName>
+    <deprecated>false</deprecated>
+    <description>You may update a field on the master record. The update occurs when the user Logs Activity, either from PointMerge or Mass Merge. 
+
+Enter the API field name, an equals sign, and the value to set (with spaces replaced with plus signs). 
+
+For example: 
+Status__c=Completed 
+
+A special case: 
+Status_Date__c=Today</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter the API field name, an equals sign, and the value to set (with spaces replaced with plus signs). 
+
+Examples: 
+Status__c=Completed 
+Status_Date__c=Today 
+Stage__c=In Progress</inlineHelpText>
+    <label>Master Field to Set 1</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

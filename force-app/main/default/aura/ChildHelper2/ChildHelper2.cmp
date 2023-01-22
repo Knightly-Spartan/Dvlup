@@ -1,0 +1,7 @@
+<aura:component >
+    <article class="slds-card">
+        <div class="slds-card__body">
+        	<lightning:button label="Child 2" onclick="{! c.myAction }" />
+        </div>
+    </article>
+</aura:component>

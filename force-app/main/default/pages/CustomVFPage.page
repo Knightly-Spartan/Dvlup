@@ -1,0 +1,28 @@
+<apex:page controller="CustomVFPageController" sidebar="false" standardStylesheets="false" showHeader="false" docType="html-5.0">
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"/-->
+    <apex:includeScript value="{!URLFOR($Resource.Assets, 'jquery-3.6.0.js')}"/>
+    <script>
+        console.log('outside jquery');
+        $(document).ready(function(){
+            console.log('Ready!');
+            searchAF();
+        });
+        console.log('outside jquery');
+    </script>
+    <apex:image url="{!URLFOR($Resource.Assets,
+                     'salesforce.png')}" height="100"/>
+    <apex:image url="{!$Resource.HuronLogo}" height="100"/>
+    <apex:form >
+        <apex:pageMessages />
+        <!--apex:actionFunction name="searchAF" action="{!search}" rerender="pgBlk"/-->
+        <apex:pageBlock id="pgBlk">
+            <apex:input type="text" value="{!searchKey}" onchange="searchJS(); return false;"/>
+            <apex:commandButton value="Search" action="{!search}" rerender="pgBlk"/>
+            <apex:pageBlockTable value="{!contacts}" var="con">
+                <apex:column value="{!con.FirstName}"/>
+                <apex:column value="{!con.LastName}"/>
+                <apex:column value="{!con.Email}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

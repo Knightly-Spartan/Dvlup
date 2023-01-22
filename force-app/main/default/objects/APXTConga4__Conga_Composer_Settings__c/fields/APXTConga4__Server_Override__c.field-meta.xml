@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>APXTConga4__Server_Override__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Overrides the ServerURL parameter in Composer and Mail Merge interactions with Salesforce.
+https://na14.salesforce.com/services/Soap/u/8.0/00Dd0000000dy26
+The override value would replace na14.salesforce.com</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Overrides the ServerURL parameter in Composer and Mail Merge interactions with Salesforce.
+https://na14.salesforce.com/services/Soap/u/8.0/00Dd0000000dy26
+The override value would replace na14.salesforce.com</inlineHelpText>
+    <label>Server Endpoint URL</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

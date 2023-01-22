@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>Hiring_Manager__c</field>
+        <field>Type__c</field>
+        <field>Location__c</field>
+        <field>Hire_By__c</field>
+        <field>Job_Description__c</field>
+        <field>Min_Pay__c</field>
+        <field>Max_Pay__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Every new position record must be
+approved by the Position owner&apos;s manager</description>
+        <label>Manager Approval</label>
+        <name>Manager_Approval</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>cynthiaccapoguestadmin12345678@gmail.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Every new position record with a minimum
+salary over $150,000 must be approved by the CEO</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Position__c.Min_Pay__c</field>
+                <operation>greaterOrEqual</operation>
+                <value>150000</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>User.Manager</field>
+                <operation>notEqual</operation>
+                <value>Cynthia Capobianco</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>CEO Approval</label>
+        <name>CEO_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Ensure that a manager approves any
+position that his or her employee creates, and that any position
+with a minimum salary of more than $150,000 is approved by the
+CEO.</description>
+    <emailTemplate>unfiled$public/Recruiting_App_New_Position_Requires_Approval</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>User.UserRole</field>
+            <operation>notEqual</operation>
+            <value>CEO</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Set_Status_to_Open_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Set_Close_Date_to_Today</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Status_to_Closed_Not_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Set_Status_to_Pending_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Approve New Position</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>true</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>1</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

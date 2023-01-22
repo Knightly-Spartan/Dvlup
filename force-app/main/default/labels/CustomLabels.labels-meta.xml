@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>DOB_Can_t_Be_Null</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>DOB Can&apos;t Be Null</shortDescription>
+        <value>Date of birth can&apos;t be null.</value>
+    </labels>
+    <labels>
+        <fullName>FirstVFPage</fullName>
+        <categories>VF Page Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>FirstVFPage</shortDescription>
+        <value>This is my Second Visual Force page.</value>
+    </labels>
+    <labels>
+        <fullName>IndustryRequired</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>IndustryRequired</shortDescription>
+        <value>Industry field is required</value>
+    </labels>
+    <labels>
+        <fullName>No_Account_Id_Message</fullName>
+        <categories>VF Page Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No Account Id Message</shortDescription>
+        <value>No existing account found. Save would create a new Account</value>
+    </labels>
+    <labels>
+        <fullName>welcome_message</fullName>
+        <categories>MyFirstVFPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>welcome message</shortDescription>
+        <value>Welcome To My First Visual Force Page</value>
+    </labels>
+</CustomLabels>

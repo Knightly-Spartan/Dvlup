@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>APXTConga4__Launch_C8_Formula_Button__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF( OR(APXTConga4__Sample_Record_Id__c = &quot;&quot;,  APXTConga4__Button_Link_API_Name__c = &quot;&quot;), IMAGE( &quot;/resource/DisabledLaunchButton&quot; , &quot;Launch Composer&quot;), 
+
+HYPERLINK(&quot;https://&quot; &amp; MID( $Api.Enterprise_Server_URL_320, FIND(&quot;://&quot;, $Api.Enterprise_Server_URL_100)+3, FIND( &quot;.com&quot;, $Api.Enterprise_Server_URL_100 )-4) 
+&amp; &quot;servlet/servlet.Integration?lid=&quot; &amp; APXTConga4__Weblink_Id__c 
+&amp; &quot;&amp;eid=&quot; &amp; APXTConga4__Sample_Record_Id__c &amp; &quot;&amp;ic=1&quot; 
+, IMAGE( &quot;/resource/ComposerLaunchButton&quot; , &quot;Launch Composer&quot;), &quot;_blank&quot; ) 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Launch</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
