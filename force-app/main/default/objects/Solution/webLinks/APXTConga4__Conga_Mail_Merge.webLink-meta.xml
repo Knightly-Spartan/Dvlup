@@ -20,7 +20,7 @@ COPY THE URL FROM THIS BUTTON and paste it into your own custom button or link. 
     <showsLocation>false</showsLocation>
     <showsStatus>false</showsStatus>
     <url>https://composer.congamerge.com
-?serverUrl={!API.Partner_Server_URL_370}
+?serverUrl={!API.Partner_Server_URL_520}
 &amp;id={!Solution.Id}</url>
     <width>900</width>
 </WebLink>

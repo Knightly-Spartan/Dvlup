@@ -8,5 +8,6 @@
     <relationshipLabel>Quotes</relationshipLabel>
     <relationshipName>Quotes</relationshipName>
     <required>false</required>
+    <trackHistory>false</trackHistory>
     <type>Lookup</type>
 </CustomField>

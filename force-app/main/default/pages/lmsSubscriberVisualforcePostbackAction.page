@@ -1,5 +1,4 @@
-<apex:page
-    controller="LMSVisualforceController"
+<apex:page controller="LMSVisualforceController"
     lightningStylesheets="true"
     docType="html-5.0"
 >
@@ -8,8 +7,7 @@
 
     <apex:outputPanel id="contactlist">
         <div class="slds-card">
-            <apex:outputPanel
-                layout="block"
+            <apex:outputPanel layout="block"
                 rendered="{!NOT(ISBLANK(contactRecord.Id))}"
                 styleClass="slds-card__body slds-card__body_inner"
             >
@@ -47,10 +45,9 @@
             </footer>
         </div>
     </apex:outputPanel>
-    <apex:form>
+    <apex:form >
         <!-- Surface apex controller method as JS function -->
-        <apex:actionFunction
-            action="{!refreshContact}"
+        <apex:actionFunction action="{!refreshContact}"
             name="refreshContactsFunction"
             reRender="contactlist"
         >

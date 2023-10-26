@@ -10,7 +10,7 @@
     <openType>sidebar</openType>
     <protected>false</protected>
     <url>/apex/APXTConga4__Conga_Composer
-?ServerUrl={!$Api.Partner_Server_URL_370}
+?ServerUrl={!$Api.Partner_Server_URL_520}
 &amp;uiscreen=qb
 &amp;id={!APXTConga4__Conga_Merge_Query__c.Id}
 &amp;isLoaderAbsolute=1

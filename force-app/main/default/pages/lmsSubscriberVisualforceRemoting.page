@@ -21,10 +21,9 @@
     </div>
 
     <!-- Data access through remote object API -->
-    <apex:remoteObjects>
-        <apex:remoteObjectModel
-            name="Contact"
-            fields="Id, Name, Title, Phone, Email, Picture__c"
+    <apex:remoteObjects >
+        <apex:remoteObjectModel name="Contact"
+            fields="Id,Name,Title,Phone,Email,Picture__c"
         />
     </apex:remoteObjects>
 

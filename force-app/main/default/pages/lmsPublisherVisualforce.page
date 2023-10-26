@@ -20,7 +20,7 @@
     </div>
 
     <!-- Data access through remote object API -->
-    <apex:remoteObjects>
+    <apex:remoteObjects >
         <apex:remoteObjectModel name="Contact" fields="Id,Name,Picture__c" />
     </apex:remoteObjects>
 

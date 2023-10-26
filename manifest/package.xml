@@ -73,17 +73,6 @@
 		<name>CallCenter</name>
 	</types>
 	<types>
-		<members>APXTConga4__Conga_Composer_AP_oauth_c4s__Conga_Composer_AP_oauth_c4sCanvas</members>
-		<members>APXTConga4__Conga_Composer_EU_oauth_c4s__Conga_Composer_EU_oauth_c4sCanvas</members>
-		<members>APXTConga4__Conga_Composer_SF1_AP_oauth_c4s__Conga_Composer_SF1_AP_oauth_c4sCanvas</members>
-		<members>APXTConga4__Conga_Composer_SF1_EU_oauth_c4s__Conga_Composer_SF1_EU_oauth_c4sCanvas</members>
-		<members>APXTConga4__Conga_Composer_SF1_oauth_c4s__Conga_Composer_SF1_oauth_c4sCanvas</members>
-		<members>APXTConga4__Conga_Composer_oauth_c4s_2__Conga_Composer_oauth_c4s_2Canvas</members>
-		<members>mule__dataloader_io2_oauth_c4s__dataloader_io2_oauth_c4sCanvas</members>
-		<members>pfx__Q3e_Configurator_oauth_c4s__Q3e_Configurator_oauth_c4sCanvas</members>
-		<name>CanvasMetadata</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>Certificate</name>
 	</types>

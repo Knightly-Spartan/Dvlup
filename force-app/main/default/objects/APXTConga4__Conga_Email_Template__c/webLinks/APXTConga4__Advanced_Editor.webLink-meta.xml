@@ -10,7 +10,7 @@
     <openType>sidebar</openType>
     <protected>false</protected>
     <url>/apex/APXTConga4__Conga_Composer
-?ServerUrl={!$Api.Partner_Server_URL_290}
+?ServerUrl={!$Api.Partner_Server_URL_520}
 &amp;Id={!APXTConga4__Conga_Email_Template__c.Id}
 &amp;uiscreen=emaileditor
 &amp;isLoaderAbsolute=1

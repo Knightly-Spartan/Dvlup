@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <name>region1</name>
@@ -7,8 +7,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>eventSimple</componentName>
                 <identifier>eventSimple</identifier>
-<componentName>eventSimple</componentName>
             </componentInstance>
         </itemInstances>
         <name>region2</name>
@@ -17,8 +17,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>eventWithData</componentName>
                 <identifier>eventWithData</identifier>
-<componentName>eventWithData</componentName>
             </componentInstance>
         </itemInstances>
         <name>region3</name>
@@ -27,8 +27,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>eventBubbling</componentName>
                 <identifier>eventBubbling</identifier>
-<componentName>eventBubbling</componentName>
             </componentInstance>
         </itemInstances>
         <name>region4</name>
