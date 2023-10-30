@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Transactions" icon-name="custom:custom17">
+        <c-transaction-filters
+            selected-quantity={selectedQuantity}
+            selected-timeframe={selectedTimeframe}
+            ontimeframeselect={handleTimeframeSelection}
+            onquantityselect={handleQuantitySelection}
+        ></c-transaction-filters>
+
+        <div class="slds-align_absolute-center">
+            <c-transaction-chart chart-data={chartData}></c-transaction-chart>
+        </div>
+        <div class="slds-align_absolute-center">
+            Total Income: <lightning-formatted-number value={totalIncome} format-style="currency"></lightning-formatted-number>&emsp;
+            Total Expense: <lightning-formatted-number value={totalExpense} format-style="currency"></lightning-formatted-number>
+        </div>
+
+        <template lwc:if={error}>
+            <p>{error}</p>
+        </template>
+    </lightning-card>
+</template>

@@ -47,10 +47,14 @@ export default class LibsChartjs extends LightningElement {
         },
         options: {
             responsive: false,
-            plugins: {
-                legend: {
-                    position: 'right'
-                }
+            datalabels: {
+                display: true,
+                backgroundColor: '#ccc',
+                borderRadius: 3,
+                font: {
+                    color: 'red',
+                    weight: 'bold',
+                },
             },
             animation: {
                 animateScale: true,

@@ -1,0 +1,26 @@
+<template>
+    <div class="slds-grid slds-gutters slds-p-horizontal_small">
+        <div class="slds-col">
+            <lightning-combobox label="Select Timeframe" name="timeframe" value={selectedTimeframe} options={timeframes}
+                onchange={handleTimeframeSelection}></lightning-combobox>
+        </div>
+        <div class="slds-col">
+            <template lwc:if={isTimeframe.Days}>
+                <lightning-combobox label="Select Number of Days" name="daysQuantity" options={daysOptions}
+                    value={selectedQuantity} onchange={handleQuantitySelection}></lightning-combobox>
+            </template>
+            <template lwc:elseif={isTimeframe.Weeks}>
+                <lightning-combobox label="Select Number of Weeks" name="weeksQuantity" options={weeksOptions}
+                    value={selectedQuantity} onchange={handleQuantitySelection}></lightning-combobox>
+            </template>
+            <template lwc:elseif={isTimeframe.Months}>
+                <lightning-combobox label="Select Number of Months" name="monthsQuantity" options={monthsOptions}
+                    value={selectedQuantity} onchange={handleQuantitySelection}></lightning-combobox>
+            </template>
+            <template lwc:else>
+                <lightning-combobox label="Select Number of Years" name="yearsQuantity" options={yearsOptions}
+                    value={selectedQuantity} onchange={handleQuantitySelection}></lightning-combobox>
+            </template>
+        </div>
+    </div>
+</template>
