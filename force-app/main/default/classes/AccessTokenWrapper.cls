@@ -5,7 +5,7 @@ public class AccessTokenWrapper {
 	public String id;
 	public String token_type;
 	public String issued_at;
-	public String signature;
+	public String signature; 
 
 	
 	public static AccessTokenWrapper parse(String json) {
