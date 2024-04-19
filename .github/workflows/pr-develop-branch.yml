@@ -58,10 +58,13 @@ jobs:
           npm install
           
       # Install the SFDX CLI using npm command
-      - name: Install the SFDX CLI
+      - name: 'Install Salesforce CLI'
         run: |
-          npm install sfdx-cli --global
-          sfdx force --help
+            wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+            mkdir ~/sfdx
+            tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
+            echo "$HOME/sfdx/bin" >> $GITHUB_PATH
+            ~/sfdx/bin/sfdx version
 
       - name: Install the sfdx-git-delta plugin
         run: |
