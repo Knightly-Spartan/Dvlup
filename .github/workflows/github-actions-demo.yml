@@ -1,10 +1,18 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-
+name: PR 
+run-name: Validating To master, ${{ github.actor }} tiggered GitHub Actions 🚀
 on:
+  # The workflow will run whenever an event happens on a pull request
   pull_request:
+    # The events are that a PR is opened, or when a commit is pushed
+    # to a branch that has an existing pull request
     types: [opened, synchronize]
+    # The branches filter allows to specify that this workflow should only
+    # run if the branch name is "develop". This way we prevent this workflow
+    # from running when PRs are opened on other branches
     branches: [ master ]
+    # We only care about changes to the force-app directory, which is the
+    # root directory of the sfdx project. This prevents the job from running
+    # when changing non-salesforce files (like this yml file).
     paths:
       - 'force-app/**'
 
@@ -14,12 +22,17 @@ permissions:
   security-events: write
   
 jobs:
+  # This is the name of the job. You can give it whatever name you want
   Explore-GitHub-Actions:
+     # This job runs inside a VM. Here we
+        # can specify which OS this VM should run on. 
+        # In this case, we are going to run our commands on the latest version
+        # of ubuntu
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - run: echo "🔎 The name of your branch path is ${{ github.ref }}, name is ${{ github.ref_name }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v3
 
@@ -32,6 +45,7 @@ jobs:
       
   build:
     runs-on: ubuntu-latest
+    environment: master
     steps:
       # Checkout the Source code from the latest commit
       - uses: actions/checkout@v3
@@ -41,21 +55,28 @@ jobs:
       - name: Install NPM
         run: |
           npm install
-      # Install the SFDX CLI using npm command
-      - name: Install the SFDX CLI
+          
+      # Now Install Salesforce CLI
+      - name: 'Install Salesforce CLI'
         run: |
             wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
             mkdir ~/sfdx
             tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
             echo "$HOME/sfdx/bin" >> $GITHUB_PATH
             ~/sfdx/bin/sfdx version
+
+      - name: Install the sfdx-git-delta plugin
+        run: |
+          echo 'y' | sfdx plugins:install sfdx-git-delta
+                    
       - name: Decrypt the server.key.enc file & store inside assets folder
         run: |
           openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server.key -base64 -K DE3B4F6346E0CFA95CA695168A0FD8DA4D06AE808A0AFA9A4DBD2502D5DD6FE7 -iv AC767FEDCF2105140E84B62495C3F43A
-
+        # openssl enc -nosalt -aes-256-cbc -d -in ${{ vars.ENCRYPTION_KEY_FILE }} -out ${{ vars.JWT_KEY_FILE }} -base64 -K ${{ secrets.DECRYPTION_KEY }} -iv ${{ secrets.DECRYPTION_IV }}
+          
       - name: Authenticate Salesforce ORG
         run: |
-          sfdx force:auth:jwt:grant -i 3MVG9ZL0ppGP5UrBIUp0vVLlmHx9wOBbqgn3CiGg4bAz.otqBO9YFS4PWiq7B4fBZvybN0SPcwepH83XEvpQO -f assets/server.key --username vinayakdadhich1999@gmail.com.dvlup -a my-hub-org        
+          sfdx force:auth:jwt:grant -i 3MVG9ZL0ppGP5UrBIUp0vVLlmHx9wOBbqgn3CiGg4bAz.otqBO9YFS4PWiq7B4fBZvybN0SPcwepH83XEvpQO -f assets/server.key --username vinayakdadhich1999@gmail.com.dvlup  -a HubOrg
       - name: Generate the package.xml for delta files
         run: |
           mkdir changed-sources
@@ -63,7 +84,12 @@ jobs:
       
       - name: validate Delta components to Salesofrce
         run: |
-          sfdx force:source:deploy -p "changed-sources/force-app" -u my-hub-org --checkonly --testlevel NoTestRun --json
+          sfdx force:source:deploy -p "changed-sources/force-app" -u HubOrg --checkonly --testlevel NoTestRun --json
 
       - name: 'validate destructive changes (if any)'
-        run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u my-hub-org --checkonly --testlevel NoTestRun --ignorewarnings 
+        run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u HubOrg --checkonly --testlevel NoTestRun --ignorewarnings 
+
+
+      #- name: Validate Source Code Against Salesforce ORG
+      #  run: |
+      #    sfdx force:source:deploy -p force-app -c -u HubOrg
