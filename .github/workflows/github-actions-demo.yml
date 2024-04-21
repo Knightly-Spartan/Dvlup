@@ -40,7 +40,7 @@ jobs:
 
       - name: Authenticate Salesforce ORG
         run: |
-           sfdx force:auth:jwt:grant --clientid 3MVG9ZL0ppGP5UrBIUp0vVLlmHx9wOBbqgn3CiGg4bAz.otqBO9YFS4PWiq7B4fBZvybN0SPcwepH83XEvpQO --jwtkeyfile assets/server.key --username vinayakdadhich1999@gmail.com.dvlup --setdefaultdevhubusername -a HubOrg
+           sfdx force:auth:jwt:grant --client-id | -i 3MVG9ZL0ppGP5UrBIUp0vVLlmHx9wOBbqgn3CiGg4bAz.otqBO9YFS4PWiq7B4fBZvybN0SPcwepH83XEvpQO --jwt-key-file | -f assets/server.key --username vinayakdadhich1999@gmail.com.dvlup --set-default-dev-hub | -d -a HubOrg
 
       - name: Generate the package.xml for delta files
         run: |
