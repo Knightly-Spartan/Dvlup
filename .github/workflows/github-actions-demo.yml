@@ -37,3 +37,18 @@ jobs:
       - name: Decrypt the server.key.enc file & store inside assets folder
         run: |
           openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server.key -base64 -K DE3B4F6346E0CFA95CA695168A0FD8DA4D06AE808A0AFA9A4DBD2502D5DD6FE7 -iv AC767FEDCF2105140E84B62495C3F43A
+
+      - name: Authenticate Salesforce ORG
+        run: |
+          sfdx force:auth:jwt:grant --clientid 3MVG9ZL0ppGP5UrBIUp0vVLlmHx9wOBbqgn3CiGg4bAz.otqBO9YFS4PWiq7B4fBZvybN0SPcwepH83XEvpQO --jwtkeyfile assets/server.key --username vinayakdadhich1999@gmail.com.dvlup --setdefaultdevhubusername -a HubOrg
+      - name: Generate the package.xml for delta files
+        run: |
+          mkdir changed-sources
+          sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output changed-sources/ --generate-delta --source force-app/
+      
+      - name: validate Delta components to Salesofrce
+        run: |
+          sfdx force:source:deploy -p "changed-sources/force-app" -u HubOrg --checkonly --testlevel NoTestRun --json
+
+      - name: 'validate destructive changes (if any)'
+        run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u HubOrg --checkonly --testlevel NoTestRun --ignorewarnings 
