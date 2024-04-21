@@ -40,7 +40,7 @@ jobs:
 
       - name: Authenticate Salesforce ORG
         run: |
-           sf org login jwt --client-id 3MVG9ZL0ppGP5UrBIUp0vVLlmHx9wOBbqgn3CiGg4bAz.otqBO9YFS4PWiq7B4fBZvybN0SPcwepH83XEvpQO --jwt-key-file assets/server.key --username vinayakdadhich1999@gmail.com.dvlup --alias my-hub-org1 --instance-url https://spartan-dev-ed.lightning.force.com/
+           sfdx force:auth:jwt:grant -i 3MVG9ZL0ppGP5UrBIUp0vVLlmHx9wOBbqgn3CiGg4bAz.otqBO9YFS4PWiq7B4fBZvybN0SPcwepH83XEvpQO -f assets/server.key --username vinayakdadhich1999@gmail.com.dvlup -a HubOrg
       - name: Generate the package.xml for delta files
         run: |
           mkdir changed-sources
