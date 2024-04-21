@@ -72,7 +72,7 @@ jobs:
       
       - name: validate Delta components to Salesofrce
         run: |
-          sfdx force:source:deploy -p "changed-sources/force-app" -u HubOrg --checkonly --testlevel NoTestRun --json
+          sfdx force:source:deploy -p "changed-sources/force-app" -u my-hub-org --checkonly --testlevel NoTestRun --json
 
       - name: 'validate destructive changes (if any)'
-        run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u HubOrg --checkonly --testlevel NoTestRun --ignorewarnings 
+        run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u my-hub-org --checkonly --testlevel NoTestRun --ignorewarnings 
