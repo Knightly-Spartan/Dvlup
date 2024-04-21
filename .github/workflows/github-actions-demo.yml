@@ -2,18 +2,9 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 
 on:
-  # The workflow will run whenever an event happens on a pull request
   pull_request:
-    # The events are that a PR is opened, or when a commit is pushed
-    # to a branch that has an existing pull request
     types: [opened, synchronize]
-    # The branches filter allows to specify that this workflow should only
-    # run if the branch name is "develop". This way we prevent this workflow
-    # from running when PRs are opened on other branches
-    branches: [ UAT ]
-    # We only care about changes to the force-app directory, which is the
-    # root directory of the sfdx project. This prevents the job from running
-    # when changing non-salesforce files (like this yml file).
+    branches: [ master ]
     paths:
       - 'force-app/**'
 
@@ -64,7 +55,7 @@ jobs:
 
       - name: Authenticate Salesforce ORG
         run: |
-           sf org login web --client-id 3MVG9ZL0ppGP5UrBIUp0vVLlmHx9wOBbqgn3CiGg4bAz.otqBO9YFS4PWiq7B4fBZvybN0SPcwepH83XEvpQO --set-default-dev-hub --alias my-hub-org
+          sfdx force:auth:jwt:grant -i 3MVG9ZL0ppGP5UrBIUp0vVLlmHx9wOBbqgn3CiGg4bAz.otqBO9YFS4PWiq7B4fBZvybN0SPcwepH83XEvpQO -f assets/server.key --username vinayakdadhich1999@gmail.com.dvlup -a my-hub-org        
       - name: Generate the package.xml for delta files
         run: |
           mkdir changed-sources
@@ -72,7 +63,7 @@ jobs:
       
       - name: validate Delta components to Salesofrce
         run: |
-          sfdx force:source:deploy -p "changed-sources/force-app" -u HubOrg --checkonly --testlevel NoTestRun --json
+          sfdx force:source:deploy -p "changed-sources/force-app" -u my-hub-org --checkonly --testlevel NoTestRun --json
 
       - name: 'validate destructive changes (if any)'
-        run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u HubOrg --checkonly --testlevel NoTestRun --ignorewarnings 
+        run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u my-hub-org --checkonly --testlevel NoTestRun --ignorewarnings 
