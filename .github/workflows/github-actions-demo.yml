@@ -1,18 +1,9 @@
 name: PR 
 run-name: Validating To master, ${{ github.actor }} tiggered GitHub Actions 🚀
 on:
-  # The workflow will run whenever an event happens on a pull request
   pull_request:
-    # The events are that a PR is opened, or when a commit is pushed
-    # to a branch that has an existing pull request
     types: [opened, synchronize]
-    # The branches filter allows to specify that this workflow should only
-    # run if the branch name is "develop". This way we prevent this workflow
-    # from running when PRs are opened on other branches
     branches: [ master ]
-    # We only care about changes to the force-app directory, which is the
-    # root directory of the sfdx project. This prevents the job from running
-    # when changing non-salesforce files (like this yml file).
     paths:
       - 'force-app/**'
 
@@ -22,12 +13,7 @@ permissions:
   security-events: write
   
 jobs:
-  # This is the name of the job. You can give it whatever name you want
-  Explore-GitHub-Actions:
-     # This job runs inside a VM. Here we
-        # can specify which OS this VM should run on. 
-        # In this case, we are going to run our commands on the latest version
-        # of ubuntu
+  Pull-Request-Action:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -47,7 +33,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: master
     steps:
-      # Checkout the Source code from the latest commit
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -56,7 +41,6 @@ jobs:
         run: |
           npm install
           
-      # Now Install Salesforce CLI
       - name: 'Install Salesforce CLI'
         run: |
             wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
@@ -72,7 +56,6 @@ jobs:
       - name: Decrypt the server.key.enc file & store inside assets folder
         run: |
           openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server.key -base64 -K DE3B4F6346E0CFA95CA695168A0FD8DA4D06AE808A0AFA9A4DBD2502D5DD6FE7 -iv AC767FEDCF2105140E84B62495C3F43A
-        # openssl enc -nosalt -aes-256-cbc -d -in ${{ vars.ENCRYPTION_KEY_FILE }} -out ${{ vars.JWT_KEY_FILE }} -base64 -K ${{ secrets.DECRYPTION_KEY }} -iv ${{ secrets.DECRYPTION_IV }}
           
       - name: Authenticate Salesforce ORG
         run: |
@@ -88,8 +71,3 @@ jobs:
 
       - name: 'validate destructive changes (if any)'
         run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u HubOrg --checkonly --testlevel NoTestRun --ignorewarnings 
-
-
-      #- name: Validate Source Code Against Salesforce ORG
-      #  run: |
-      #    sfdx force:source:deploy -p force-app -c -u HubOrg
