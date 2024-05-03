@@ -1,4 +1,4 @@
-name: DVLUP Push
+name: DVLUP Deploy
 run-name: Deploying To DVLUP, ${{ github.actor }} tiggered GitHub Actions 🚀
 
 on:
