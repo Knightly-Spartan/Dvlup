@@ -1,4 +1,4 @@
-name: PR 
+name: DVLUP Validate 
 run-name: Validating To master, ${{ github.actor }} tiggered GitHub Actions 🚀
 on:
   pull_request:
